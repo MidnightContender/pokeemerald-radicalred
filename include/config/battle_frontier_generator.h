@@ -382,7 +382,6 @@
 #define BFG_MOVE_FOUL_PLAY_SELECTION_CHANCE         4   // Foul Play Selection Chance (Non-Physical Set)
 #define BFG_MOVE_WEATHER_SELECTION_CHANCE           4   // Weather Selection Chance (for relevant ability mons)
 #define BFG_MOVE_EXPLODE_SELECTION_CHANCE           16  // Explosion Selection Chance (Per-Move)
-#define BFG_MOVE_FLING_SELECTION_CHANCE             16  // Fling Selection Chance (+spe/spe invested mons)
 #define BFG_MOVE_OHKO_SELECTION_CHANCE              16  // OHKO Move Selection Chance (Bulky mons)
 #define BFG_MOVE_REST_SELECTION_CHANCE              16  // Rest selection chance (Bulky mons)
 
