@@ -99,7 +99,8 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
 	[MOVE_COUNTER] = TRUE, \
 	[MOVE_METAL_BURST] = TRUE, \
 	[MOVE_MIRROR_COAT] = TRUE, \
-	[MOVE_BLIZZARD] = TRUE
+	[MOVE_BLIZZARD] = TRUE, \
+	[MOVE_UPPER_HAND] = TRUE
 
 const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
 {
