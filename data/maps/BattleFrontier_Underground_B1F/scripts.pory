@@ -395,6 +395,7 @@ mart BattleFrontier_Underground_B1F_Mart_TrainingShopTeraClerk {
     ITEM_ROCK_TERA_SHARD
     ITEM_STEEL_TERA_SHARD
     ITEM_WATER_TERA_SHARD
+    ITEM_STELLAR_TERA_SHARD
 }
 
 mart BattleFrontier_Underground_B1F_Mart_BattleShopMegaClerk {
