@@ -55,6 +55,13 @@ bool8 GetStrictSpeciesChecks(u16 speciesId, struct GeneratorProperties * propert
 #define IS_PROTECTING_MOVE(x) (((x) == MOVE_BANEFUL_BUNKER) || ((x) == MOVE_BURNING_BULWARK) || ((x) == MOVE_DETECT) || ((x) == MOVE_KINGS_SHIELD) || ((x) == MOVE_OBSTRUCT) || ((x) == MOVE_PROTECT) || ((x) == MOVE_SILK_TRAP))
 #define IS_RECOVERY_MOVE(x) (((x) == MOVE_AQUA_RING) || ((x) == MOVE_FLORAL_HEALING) || ((x) == MOVE_HEAL_PULSE) || ((x) == MOVE_HEALING_WISH) || ((x) == MOVE_INGRAIN) || ((x) == MOVE_JUNGLE_HEALING) || ((x) == MOVE_LEECH_SEED) || ((x) == MOVE_LIFE_DEW) || ((x) == MOVE_LUNAR_BLESSING) || ((x) == MOVE_LUNAR_DANCE) || ((x) == MOVE_PAIN_SPLIT) || ((x) == MOVE_POLLEN_PUFF) || ((x) == MOVE_REVIVAL_BLESSING) || ((x) == MOVE_WISH) || ((x) == MOVE_HEAL_ORDER) || ((x) == MOVE_MILK_DRINK) || ((x) == MOVE_MOONLIGHT) || ((x) == MOVE_MORNING_SUN) || ((x) == MOVE_PURIFY) || ((x) == MOVE_RECOVER) || ((x) == MOVE_REST) || ((x) == MOVE_ROOST) || ((x) == MOVE_SHORE_UP) || ((x) == MOVE_SLACK_OFF) || ((x) == MOVE_SOFT_BOILED) || ((x) == MOVE_STRENGTH_SAP) || ((x) == MOVE_SYNTHESIS))
 
+#define IS_SPECIAL_SETUP_MOVE(x) (((x) == MOVE_CALM_MIND) || ((x) == MOVE_NASTY_PLOT) || ((x) == MOVE_QUIVER_DANCE) || ((x) == MOVE_TAIL_GLOW) || ((x) == MOVE_GEOMANCY))
+#define IS_PHYSICAL_SETUP_MOVE(x) (((x) == MOVE_BELLY_DRUM) || ((x) == MOVE_BULK_UP) || ((x) == MOVE_COIL) || ((x) == MOVE_DRAGON_DANCE) || ((x) == MOVE_HONE_CLAWS) || ((x) == MOVE_SHIFT_GEAR) || ((x) == MOVE_SWORDS_DANCE) || ((x) == MOVE_TIDY_UP))
+#define IS_DEFENSIVE_SETUP_MOVE(x) (((x) == MOVE_COSMIC_POWER) || ((x) == MOVE_DEFEND_ORDER) || ((x) == MOVE_STOCKPILE))
+#define IS_SPEED_SETUP_MOVE(x) (((x) == MOVE_AGILITY) || ((x) == MOVE_ROCK_POLISH))
+#define IS_OTHER_SETUP_MOVE(x) (((x) == MOVE_ACUPRESSURE) || ((x) == MOVE_CLANGOROUS_SOUL) || ((x) == MOVE_FILLET_AWAY) || ((x) == MOVE_GROWTH) || ((x) == MOVE_NO_RETREAT) || ((x) == MOVE_SHELL_SMASH) || ((x) == MOVE_WORK_UP) || ((x) == MOVE_CURSE) || ((x) == MOVE_HOWL) || ((x) == MOVE_SPICY_EXTRACT))
+#define IS_SETUP_MOVE(x) (IS_SPECIAL_SETUP_MOVE(x) || IS_PHYSICAL_SETUP_MOVE(x) || IS_DEFENSIVE_SETUP_MOVE(x) || IS_SPEED_SETUP_MOVE(x) || IS_OTHER_SETUP_MOVE(x))
+
 #define IS_SUN_EFFECT(e) ((e == EFFECT_SUNNY_DAY))
 #define IS_RAIN_EFFECT(e) ((e == EFFECT_RAIN_DANCE))
 #define IS_SAND_EFFECT(e) ((e == EFFECT_SANDSTORM))
@@ -883,24 +890,6 @@ static u16 GetAttackRating(u16 speciesId, u32 moveId, u16 abilityId, u8 type)
     return rating;
 }
 
-static bool8 CheckMoveRecovery(struct GeneratorMoves * options) {
-    u8 i;
-    for(i=0; i < (options->moveCount); i++) {
-        if (IS_RECOVERY_MOVE(options->moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
-static bool8 CheckMoveProtect(struct GeneratorMoves * options) {
-    u8 i;
-    for(i=0; i < (options->moveCount); i++) {
-        if (IS_PROTECTING_MOVE(options->moves[i]))
-            return TRUE;
-    }
-    return FALSE;
-}
-
 static bool8 CheckMoveDuplicate(u16 moveId, struct GeneratorMoves * options) {
     u8 i;
     for(i=0; i < (options->moveCount); i++) {
@@ -945,6 +934,18 @@ static bool8 TryUpdateMove(struct Pokemon * mon, u16 moveId, struct GeneratorMov
             if (type != oldType)
                 (options->types)[oldType] = BFG_MOVE_TYPE_NONE;
         }
+        // Otherwise, if move is a status move
+        else if (CATEGORY(moveId) == DAMAGE_CATEGORY_STATUS) {
+
+            // Update redundancy checks 
+
+            if (IS_SETUP_MOVE(moveId))
+                options->hasSetupMove = TRUE; 
+            else if (IS_RECOVERY_MOVE(moveId))
+                options->hasRecoveryMove = TRUE; 
+            else if (IS_PROTECTING_MOVE(moveId)) 
+                options->hasProtectingMove = TRUE;
+        }
 
         // Move added
         return TRUE;
@@ -972,33 +973,28 @@ static bool8 HandleMove(struct Pokemon * mon, u16 moveId, struct GeneratorProper
             // Trick Room
             case MOVE_TRICK_ROOM: {
                 u8 nature = GetNature(mon);
-                u8 spe = GetMonData(mon, MON_DATA_SPEED_EV);
 
-                // If the mon *low* speed evs, and a non-boosted speed nature
-                if ((spe <= 4) && (gNatureInfo[nature].posStat != STAT_SPEED)) {
-                    
-                    // Mon meets any of the following conditions:
-                    // 1. Negative speed nature
-                    // 2. Random Chance (1/BFG_MOVE_TRICK_ROOM_SELECTION_CHANCE)
-                    if ((gNatureInfo[nature].negStat == STAT_SPEED) || RANDOM_CHANCE(BFG_MOVE_TRICK_ROOM_SELECTION_CHANCE))
-                        return TryAddMove(mon, moveId, options);
-                }
+                // If has no speed evs, and a non-boosted speed nature, and random chance met
+                if ((GetMonData(mon, MON_DATA_SPEED_EV) == 0) && (gNatureInfo[nature].posStat != STAT_SPEED) && RANDOM_CHANCE(BFG_MOVE_TRICK_ROOM_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
             }; break;
             // Tailwind
             case MOVE_TAILWIND: {
                 u8 nature = GetNature(mon);
-                u8 spe = GetMonData(mon, MON_DATA_SPEED_EV);
                 u16 ability = GetMonAbility(mon);
 
                 // Mon meets any of the following conditions:
                 // 1. Positive Speed Nature
-                // 2. 252 Speed EVs
+                // 2. Any speed EVs
                 // 3. Gale Wings or Prankster abilities
-                // 4. Random Chance (1/BFG_MOVE_TAILWIND_SELECTION_CHANCE)
+                // and random selection chance is met
                 if (
-                    (gNatureInfo[nature].posStat == STAT_SPEED) || (spe == 252) || 
-                    (ability == ABILITY_GALE_WINGS) || (ability == ABILITY_PRANKSTER) || 
-                    RANDOM_CHANCE(BFG_MOVE_TAILWIND_SELECTION_CHANCE)
+                    (
+                        (gNatureInfo[nature].posStat == STAT_SPEED) || 
+                        (GetMonData(mon, MON_DATA_SPEED_EV) > 0) || 
+                        (ability == ABILITY_GALE_WINGS) || 
+                        (ability == ABILITY_PRANKSTER)
+                    ) && RANDOM_CHANCE(BFG_MOVE_TAILWIND_SELECTION_CHANCE)
                 )
                     return TryAddMove(mon, moveId, options);
             }; break;
@@ -1006,69 +1002,69 @@ static bool8 HandleMove(struct Pokemon * mon, u16 moveId, struct GeneratorProper
             case MOVE_AURORA_VEIL: {
                 u16 ability = GetMonAbility(mon);
 
-                // Mon has a hail ability
-                if (IS_HAIL_ABILITY(ability))
+                // Mon has a hail ability, and random selection chance is met
+                if (IS_HAIL_ABILITY(ability) && RANDOM_CHANCE(BFG_MOVE_WEATHER_ATTACK_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Final Gambit
             case MOVE_FINAL_GAMBIT: {
-                u8 hp = GetMonData(mon, MON_DATA_HP_EV);
-                u8 spe = GetMonData(mon, MON_DATA_SPEED_EV);
-
-                // Max speed, almost max. HP
-                if ((hp == 252 && spe == 252))
+                // Max hp, and random selection chance is met
+                if ((GetMonData(mon, MON_DATA_HP_EV) == 252) && RANDOM_CHANCE(BFG_MOVE_FINAL_GAMBIT_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Body Press
             case MOVE_BODY_PRESS: {
                 u8 nature = GetNature(mon);
-                u8 def = GetMonData(mon, MON_DATA_DEF_EV);
 
-                // Defense-boosting nature, or almost max. defense
-                if ((gNatureInfo[nature].posStat == STAT_DEF) || (def == 252))
+                // Defense-boosting nature, or invested defense, and random chance is met
+                if (
+                    ((gNatureInfo[nature].posStat == STAT_DEF) || (GetMonData(mon, MON_DATA_DEF_EV) > 0)) && 
+                    RANDOM_CHANCE(BFG_MOVE_BODY_PRESS_SELECTION_CHANCE)
+                )
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Foul Play
             case MOVE_FOUL_PLAY: {
                 u8 nature = GetNature(mon);
-                u8 atk = GetMonData(mon, MON_DATA_ATK_EV);
 
-                // Non-attack boosting nature, and no attack evs
-                if ((gNatureInfo[nature].posStat != STAT_ATK) && (atk == 0))
-                {
-                    u16 species = GetMonData(mon, MON_DATA_SPECIES);
-
-                    // Species is a dark type, or the foul play random selection chance is met
-                    if (IS_STAB(species, TYPE_DARK) || (RANDOM_CHANCE(BFG_MOVE_FOUL_PLAY_SELECTION_CHANCE)))
-                        return TryAddMove(mon, moveId, options);
-                }
+                // Non-attack boosting nature, and no attack evs, and random selection chance met
+                if ((gNatureInfo[nature].posStat != STAT_ATK) && (GetMonData(mon, MON_DATA_ATK_EV) == 0) && RANDOM_CHANCE(BFG_MOVE_FOUL_PLAY_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
             }; break;
             // Protect / Detect
             case MOVE_DETECT: 
             case MOVE_PROTECT: {
+                // Check for existing protect
+                if (options->hasProtectingMove == TRUE)
+                    break; 
+
                 u16 ability = GetMonAbility(mon);
-                // If the mon has an end-of-turn ability, or the random selection chance is met
-                if (IS_END_OF_TURN_ABILITY(ability) || RANDOM_CHANCE(BFG_MOVE_PROTECT_SELECTION_CHANCE)) {
-                    // Mon does not already have protect
-                    if (!(CheckMoveProtect(options)))
-                        return TryAddMove(mon, moveId, options);
-                }
+
+                // If the mon has an end-of-turn ability, or the format is doubles and the random selection chance is met
+                if (IS_END_OF_TURN_ABILITY(ability) || (IS_DOUBLES() && RANDOM_CHANCE(BFG_MOVE_PROTECT_SELECTION_CHANCE)))
+                    return TryAddMove(mon, moveId, options);
             }; break;
             // Sunny Day
             case MOVE_SUNNY_DAY: {
                 u16 ability = GetMonAbility(mon);
+
+                // If mon has sun bonus ability, and random weather move selection chance is met
                 if (IS_SUN_BONUS_ABILITY(ability) && RANDOM_CHANCE(BFG_MOVE_WEATHER_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Rain Dance
             case MOVE_RAIN_DANCE: {
                 u16 ability = GetMonAbility(mon);
+
+                // If mon has rain bonus ability, and random weather move selection chance is met
                 if (IS_RAIN_BONUS_ABILITY(ability) && RANDOM_CHANCE(BFG_MOVE_WEATHER_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Sandstorm
             case MOVE_SANDSTORM: {
                 u16 ability = GetMonAbility(mon);
+
+                // If mon has sand bonus ability, and random weather move selection chance is met
                 if (IS_SAND_BONUS_ABILITY(ability) && RANDOM_CHANCE(BFG_MOVE_WEATHER_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
@@ -1077,10 +1073,17 @@ static bool8 HandleMove(struct Pokemon * mon, u16 moveId, struct GeneratorProper
             case MOVE_SNOWSCAPE:
             case MOVE_CHILLY_RECEPTION: {
                 u16 ability = GetMonAbility(mon);
+
+                // If mon has hail bonus ability, and random weather move selection chance is met
                 if (IS_HAIL_BONUS_ABILITY(ability) && RANDOM_CHANCE(BFG_MOVE_WEATHER_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             case MOVE_REST: {
+
+                // Check for existing recovery
+                if (options->hasRecoveryMove == TRUE)
+                    break;
+
                 u16 ability = GetMonAbility(mon);
 
                 // If the move is 'Rest', and the mon cannot sleep
@@ -1088,7 +1091,7 @@ static bool8 HandleMove(struct Pokemon * mon, u16 moveId, struct GeneratorProper
                     break;
 
                 // Mon has a defensive spread, (near) max hp evs, and does not already have a recovery move
-                if (((GetSpreadType(mon) == BFG_SPREAD_TYPE_DEFENSIVE) || (GetMonData(mon, MON_DATA_HP_EV) >= 252)) && (!(CheckMoveRecovery(options))) && RANDOM_CHANCE(BFG_MOVE_REST_SELECTION_CHANCE))
+                if (((GetSpreadType(mon) == BFG_SPREAD_TYPE_DEFENSIVE) || (GetMonData(mon, MON_DATA_HP_EV) == 252)) && RANDOM_CHANCE(BFG_MOVE_REST_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Doubles-Specific Recovery Moves
@@ -1100,8 +1103,13 @@ static bool8 HandleMove(struct Pokemon * mon, u16 moveId, struct GeneratorProper
             }; 
             // Recovery Moves
             ALLOWED_RECOVERY_MOVES {
+                
+                // Check for existing recovery
+                if (options->hasRecoveryMove == TRUE)
+                    break;
+
                 // Mon has a defensive spread, (near) max hp evs, and does not already have a recovery move
-                if (((GetSpreadType(mon) == BFG_SPREAD_TYPE_DEFENSIVE) || (GetMonData(mon, MON_DATA_HP_EV) >= 252)) && (!(CheckMoveRecovery(options))) && RANDOM_CHANCE(BFG_MOVE_RECOVER_SELECTION_CHANCE))
+                if (((GetSpreadType(mon) == BFG_SPREAD_TYPE_DEFENSIVE) || (GetMonData(mon, MON_DATA_HP_EV) == 252)) && RANDOM_CHANCE(BFG_MOVE_RECOVER_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
             // Terrain-Reliant Moves
@@ -1177,10 +1185,132 @@ static bool8 HandleMove(struct Pokemon * mon, u16 moveId, struct GeneratorProper
                 if ((IS_RAIN_ABILITY(ability)) && (spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_WEATHER_ATTACK_SELECTION_CHANCE))
                     return TryAddMove(mon, moveId, options);
             }; break;
+
             // Setup Moves (Special)
+            case MOVE_CALM_MIND: 
+            case MOVE_NASTY_PLOT: 
+            case MOVE_QUIVER_DANCE: 
+            case MOVE_TAIL_GLOW: 
+            case MOVE_GEOMANCY: {
+                // Skip if existing setup moves
+                if (options->hasSetupMove == TRUE)
+                    break;
 
+                // Get spread Physical / Special focus
+                u8 spreadCategory = GetSpreadCategory(mon);
+
+                // Add if spread category is special, and selection chance is met
+                if ((spreadCategory == BFG_SPREAD_CATEGORY_SPECIAL) && RANDOM_CHANCE(BFG_MOVE_OFFENSIVE_SETUP_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
+            }; break;
             // Setup Moves (Physical)
+            case MOVE_BELLY_DRUM: 
+            case MOVE_BULK_UP:
+            case MOVE_COIL:
+            case MOVE_DRAGON_DANCE:
+            case MOVE_HONE_CLAWS:
+            case MOVE_SHIFT_GEAR:
+            case MOVE_SWORDS_DANCE:
+            case MOVE_TIDY_UP: {
+                // Skip if existing setup moves
+                if (options->hasSetupMove == TRUE)
+                    break;
 
+                // Get spread Physical / Special focus
+                u8 spreadCategory = GetSpreadCategory(mon);
+
+                // Add if spread category is special, and selection chance is met
+                if ((spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) && RANDOM_CHANCE(BFG_MOVE_OFFENSIVE_SETUP_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
+            }; break;
+            // Setup Moves (Defenses)
+            case MOVE_COSMIC_POWER: 
+            case MOVE_DEFEND_ORDER: 
+            case MOVE_STOCKPILE: {
+                // Skip if existing setup moves
+                if (options->hasSetupMove == TRUE)
+                    break;
+
+                // Offensive or defensive spread
+                u8 spreadType = GetSpreadType(mon);
+
+                // If spread category is defensive, and selection chance is met
+                if ((spreadType == BFG_SPREAD_TYPE_DEFENSIVE) && RANDOM_CHANCE(BFG_MOVE_DEFENSIVE_SETUP_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
+
+            }; break; 
+            // Setup Moves (Speed)
+            case MOVE_AGILITY: 
+            case MOVE_ROCK_POLISH: {
+                // Skip if existing setup moves
+                if (options->hasSetupMove == TRUE)
+                    break;
+
+                // Get the mon nature
+                u8 nature = GetNature(mon);
+
+                // If non-zero speed evs or positive speed nature, and selection chance is met
+                if (((GetMonData(mon, MON_DATA_SPEED_EV) > 0) || (gNatureInfo[nature].posStat == STAT_SPEED)) && RANDOM_CHANCE(BFG_MOVE_SPEED_SETUP_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
+            }; break;
+            // Setup Moves (Mixed)
+            case MOVE_CLANGOROUS_SOUL:
+            case MOVE_FILLET_AWAY:
+            case MOVE_NO_RETREAT:
+            case MOVE_SHELL_SMASH: {
+                // Skip if existing setup moves
+                if (options->hasSetupMove == TRUE)
+                    break;
+
+                // Add if spread category is special, and selection chance is met
+                if (RANDOM_CHANCE(BFG_MOVE_OFFENSIVE_SETUP_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
+            }; break;
+            // Curse (Special Case)
+            case MOVE_CURSE: {
+                // Get mon species
+                u16 speciesId = GetMonData(mon, MON_DATA_SPECIES);
+
+                // Species is a ghost type
+                if (IS_STAB(speciesId, TYPE_GHOST)) {
+                    // If random selection chance is met
+                    if (RANDOM_CHANCE(BFG_MOVE_CURSE_GHOST_SELECTION_CHANCE))
+                        return TryAddMove(mon, moveId, options);
+                }
+                else // Any other type
+                {
+                    // Skip if existing setup moves
+                    if (options->hasSetupMove == TRUE)
+                        break;
+
+                    // Get spread Physical / Special focus
+                    u8 spreadCategory = GetSpreadCategory(mon);
+
+                    // Get mon nature
+                    u8 nature = GetNature(mon); 
+
+                    // Physical spread, no speed investment / non-positive nature, and random chance met
+                    if (
+                        (spreadCategory == BFG_SPREAD_CATEGORY_PHYSICAL) && 
+                        (gNatureInfo[nature].posStat != STAT_SPEED) && 
+                        (GetMonData(mon, MON_DATA_SPEED_EV) < 252) && 
+                        RANDOM_CHANCE(BFG_MOVE_OFFENSIVE_SETUP_SELECTION_CHANCE)
+                    )
+                        return TryAddMove(mon, moveId, options);
+                }
+            }; break;
+            case MOVE_HOWL:
+            case MOVE_COACHING:
+            case MOVE_DECORATE: 
+            case MOVE_SPICY_EXTRACT: {
+                // Skip if existing setup moves
+                if (options->hasSetupMove == TRUE)
+                    break;
+
+                // Field is doubles, and the random doubles setup selection chance is met
+                if (IS_DOUBLES() && RANDOM_CHANCE(BFG_MOVE_DOUBLES_SETUP_SELECTION_CHANCE))
+                    return TryAddMove(mon, moveId, options);
+            }
             // Self-Destructing Moves
             case MOVE_MISTY_EXPLOSION: {
                 u16 ability = GetMonAbility(mon);
@@ -3005,6 +3135,11 @@ void InitGeneratorMoves(struct GeneratorMoves * moves)
     // Initialise move counters
     moves->numAllowedStatusMoves = 0;
     moves->numAllowedAttackingMoves = 0;
+
+    // Redundancy checks
+    moves->hasSetupMove = FALSE; 
+    moves->hasRecoveryMove = FALSE; 
+    moves->hasProtectingMove = FALSE;
 }
 
 void InitGeneratorProperties(struct GeneratorProperties * properties, u8 level, u8 fixedIV)
