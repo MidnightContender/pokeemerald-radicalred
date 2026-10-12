@@ -354,8 +354,8 @@
 #define BFG_MOVE_IGNORE_TYPE_COUNT FALSE    // Ignore 1-per-type limit for moves
 #define BFG_MOVE_QUICK_REPLACE      FALSE
 // If this is set to true, the move lookup table
-// 'gBattleFrontierMoveStatusAllowSelect' will be used
-#define BFG_MOVE_USE_STATUS_ALLOW_LIST TRUE
+// 'gBattleFrontierMoveStatusWhitelist' will be used
+#define BFG_MOVE_USE_STATUS_WHITELIST TRUE
 
 #define BFG_MOVE_RATING_DEFAULT 0    // Default Rating
 #define BFG_MOVE_STAB_MODIFIER 60    // +x to rating for same-type-attack-bonus (also -x for non-stab normal attacks)
@@ -373,12 +373,15 @@
 #define BFG_MOVE_SPECIAL_PROTECT_SELECTION_CHANCE   1   // Protect Selection Chance (Speed Boost / Moody)
 #define BFG_MOVE_PROTECT_SELECTION_CHANCE           0   // Protect Selection Chance (Speed Boost / Moody)
 #define BFG_MOVE_RECOVER_SELECTION_CHANCE           4   // Recovery Selection Chance (Per-Move)
+#define BFG_MOVE_NO_GUARD_SELECTION_CHANCE          1   // Dynamic Punch / Electro Ball Selection Chance (w/ No Guard)
+#define BFG_MOVE_FACADE_SELECTION_CHANCE            1   // Facade Selection Chance (w/ normal STAB + status ability)
 #define BFG_MOVE_WEATHER_ATTACK_SELECTION_CHANCE    1   // Weather Attack Selection Chance (w/ Weather abilities)
 #define BFG_MOVE_TERRAIN_ATTACK_SELECTION_CHANCE    1   // Terrain Attack Selection Chance (w/ Terrain abilities)
 #define BFG_MOVE_BODY_PRESS_SELECTION_CHANCE        4   // Body Press Selection Chance (Invested Def/+Def Nature)
 #define BFG_MOVE_CURSE_GHOST_SELECTION_CHANCE       4   // Curse Selection Chance (Ghost Types Only)
 #define BFG_MOVE_FOUL_PLAY_SELECTION_CHANCE         4   // Foul Play Selection Chance (Non-Physical Set)
 #define BFG_MOVE_WEATHER_SELECTION_CHANCE           4   // Weather Selection Chance (for relevant ability mons)
+#define BFG_MOVE_COUNTER_SELECTION_CHANCE           8  // Counter move selection chance (Bulky mons / Sturdy)
 #define BFG_MOVE_REST_SELECTION_CHANCE              8  // Rest selection chance (Bulky mons)
 #define BFG_MOVE_FINAL_GAMBIT_SELECTION_CHANCE      16  // Final Gambit Selection Chance (Max. HP)
 #define BFG_MOVE_EXPLODE_SELECTION_CHANCE           16  // Explosion Selection Chance (Per-Move)
@@ -388,8 +391,6 @@
 #define BFG_MOVE_OFFENSIVE_SETUP_SELECTION_CHANCE       4   // Physical / Special / Mixed Setup Move Selection Chance
 #define BFG_MOVE_DEFENSIVE_SETUP_SELECTION_CHANCE       8   // Defensive Setup Move Selection Chance
 #define BFG_MOVE_SPEED_SETUP_SELECTION_CHANCE           8   // Speed Setup Move Selection Chance (Speed Invested / Boosted Nature)
-
-#define BFG_MOVE_DOUBLES_SETUP_SELECTION_CHANCE         4   // Doubles Setup Move Selection Chance
 
 // *** ITEMS ***
 
