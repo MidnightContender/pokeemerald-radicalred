@@ -21,12 +21,12 @@
 #define ALWAYS_SELECT_COMMON \
 	[MOVE_SPORE] = TRUE, \
 	[MOVE_FAKE_OUT] = TRUE, \
+	[MOVE_KINGS_SHIELD] = TRUE, \
 	[MOVE_REVIVAL_BLESSING] = TRUE
 
 const bool8 gBattleFrontierMoveAlwaysSelectSingles[MOVES_COUNT] =
 {
-	ALWAYS_SELECT_COMMON, 
-	[MOVE_KINGS_SHIELD] = TRUE,
+	ALWAYS_SELECT_COMMON
 };
 
 const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
@@ -34,7 +34,6 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
 	ALWAYS_SELECT_COMMON,
 	[MOVE_BANEFUL_BUNKER] = TRUE,
 	[MOVE_BURNING_BULWARK] = TRUE,
-	[MOVE_KINGS_SHIELD] = TRUE,
 	[MOVE_OBSTRUCT] = TRUE,
 	[MOVE_SILK_TRAP] = TRUE,
 	[MOVE_SPIKY_SHIELD] = TRUE,
@@ -62,6 +61,7 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
 	[MOVE_STORED_POWER] = TRUE, \
 	[MOVE_HIDDEN_POWER] = TRUE, \
 	[MOVE_DYNAMIC_PUNCH] = TRUE, \
+	[MOVE_ELECTRO_BALL] = TRUE, \
 	[MOVE_TERRAIN_PULSE] = TRUE, \
 	[MOVE_FUTURE_SIGHT] = TRUE, \
 	[MOVE_DOOM_DESIRE] = TRUE, \
@@ -78,17 +78,10 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
 	[MOVE_MISTY_EXPLOSION] = TRUE, \
 	[MOVE_SELF_DESTRUCT] = TRUE, \
 	[MOVE_EXPLOSION] = TRUE, \
-	[MOVE_BOUNCE] = TRUE, \
 	[MOVE_DIG] = TRUE, \
 	[MOVE_DIVE] = TRUE, \
-	[MOVE_FLY] = TRUE, \
-	[MOVE_FREEZE_SHOCK] = TRUE, \
-	[MOVE_ICE_BURN] = TRUE, \
 	[MOVE_RAZOR_WIND] = TRUE, \
 	[MOVE_SKULL_BASH] = TRUE, \
-	[MOVE_SKY_ATTACK] = TRUE, \
-	[MOVE_SOLAR_BEAM] = TRUE, \
-	[MOVE_SOLAR_BLADE] = TRUE, \
 	[MOVE_FISSURE] = TRUE, \
 	[MOVE_GUILLOTINE] = TRUE, \
 	[MOVE_HORN_DRILL] = TRUE, \
@@ -100,28 +93,27 @@ const bool8 gBattleFrontierMoveAlwaysSelectDoubles[MOVES_COUNT] =
 	[MOVE_METAL_BURST] = TRUE, \
 	[MOVE_MIRROR_COAT] = TRUE, \
 	[MOVE_BLIZZARD] = TRUE, \
+	[MOVE_THUNDER] = TRUE, \
 	[MOVE_UPPER_HAND] = TRUE
 
-const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] =
-{
+const bool8 gBattleFrontierMoveNeverSelectSingles[MOVES_COUNT] = {
 	NEVER_SELECT_COMMON,
-	[MOVE_FOLLOW_ME] = TRUE,
-	[MOVE_HELPING_HAND] = TRUE,
-	[MOVE_WIDE_GUARD] = TRUE,
-	[MOVE_RAGE_POWDER] = TRUE,
-	[MOVE_QUICK_GUARD] = TRUE,
-	[MOVE_CRAFTY_SHIELD] = TRUE,
-	[MOVE_INSTRUCT] = TRUE,
+	[MOVE_HOWL] = TRUE, 
+    [MOVE_COACHING] = TRUE, 
+    [MOVE_DRAGON_CHEER] = TRUE, 
+    [MOVE_ALLY_SWITCH] = TRUE, 
+	[MOVE_SPICY_EXTRACT] = TRUE, 
+	[MOVE_DECORATE] = TRUE, 
+	[MOVE_HELPING_HAND] = TRUE
 };
 
-const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] =
-{
+const bool8 gBattleFrontierMoveNeverSelectDoubles[MOVES_COUNT] = {
 	NEVER_SELECT_COMMON,
 };
 
 // Status moves which are allowed to be selected,
-// if 'BFG_MOVE_USE_STATUS_ALLOW_LIST' is set to true
-const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
+// if 'BFG_MOVE_USE_STATUS_WHITELIST' is set to true
+const bool8 gBattleFrontierMoveStatusWhitelist[MOVES_COUNT] =
 {
 	[MOVE_WHIRLWIND] = TRUE,
 	[MOVE_ROAR] = TRUE,
@@ -133,9 +125,11 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 	[MOVE_SLEEP_POWDER] = TRUE,
 	[MOVE_TOXIC] = TRUE,
 	[MOVE_HYPNOSIS] = TRUE,
+	[MOVE_GRASS_WHISTLE] = TRUE,
 	[MOVE_TELEPORT] = TRUE,
 	[MOVE_DOUBLE_TEAM] = TRUE,
 	[MOVE_MINIMIZE] = TRUE,
+	[MOVE_ACUPRESSURE] = TRUE,
 	[MOVE_CONFUSE_RAY] = TRUE,
 	[MOVE_LIGHT_SCREEN] = TRUE,
 	[MOVE_HAZE] = TRUE,
@@ -145,6 +139,7 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 	[MOVE_LOVELY_KISS] = TRUE,
 	[MOVE_TRANSFORM] = TRUE,
 	[MOVE_SUBSTITUTE] = TRUE,
+	[MOVE_SHED_TAIL] = TRUE,
 	// [MOVE_FORESIGHT] = TRUE,
 	[MOVE_DESTINY_BOND] = TRUE,
 	[MOVE_PERISH_SONG] = TRUE,
@@ -152,19 +147,21 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 	[MOVE_MEAN_LOOK] = TRUE,
 	[MOVE_ATTRACT] = TRUE,
 	// [MOVE_HEAL_BELL] = TRUE,
-	// [MOVE_SAFEGUARD] = TRUE,
+	[MOVE_SAFEGUARD] = TRUE,
 	[MOVE_ENCORE] = TRUE,
 	[MOVE_MIRROR_COAT] = TRUE,
+	[MOVE_COSMIC_POWER] = TRUE,
+	[MOVE_DEFEND_ORDER] = TRUE,
 	[MOVE_STOCKPILE] = TRUE,
 	[MOVE_TORMENT] = TRUE,
 	[MOVE_FLATTER] = TRUE,
 	[MOVE_WILL_O_WISP] = TRUE,
 	[MOVE_TAUNT] = TRUE,
 	[MOVE_TRICK] = TRUE,
-	// [MOVE_ROLE_PLAY] = TRUE,
+	[MOVE_ROLE_PLAY] = TRUE,
 	// [MOVE_RECYCLE] = TRUE,
 	[MOVE_YAWN] = TRUE,
-	// [MOVE_SKILL_SWAP] = TRUE,
+	[MOVE_SKILL_SWAP] = TRUE,
 	[MOVE_IMPRISON] = TRUE,
 	// [MOVE_REFRESH] = TRUE,
 	[MOVE_GRUDGE] = TRUE,
@@ -173,7 +170,7 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 	[MOVE_GRAVITY] = TRUE,
 	// [MOVE_MIRACLE_EYE] = TRUE,
 	[MOVE_SWITCHEROO] = TRUE,
-	// [MOVE_DEFOG] = TRUE,
+	[MOVE_DEFOG] = TRUE,
 	// [MOVE_GUARD_SPLIT] = TRUE,
 	// [MOVE_POWER_SPLIT] = TRUE,
 	// [MOVE_WONDER_ROOM] = TRUE,
@@ -181,6 +178,8 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 	[MOVE_SOAK] = TRUE,
 	[MOVE_SIMPLE_BEAM] = TRUE,
 	[MOVE_ENTRAINMENT] = TRUE,
+	[MOVE_WORRY_SEED] = TRUE,
+	[MOVE_CHILLY_RECEPTION] = TRUE,
 	[MOVE_TRICK_OR_TREAT] = TRUE,
 	[MOVE_FORESTS_CURSE] = TRUE,
 	[MOVE_PARTING_SHOT] = TRUE,
@@ -190,7 +189,19 @@ const bool8 gBattleFrontierMoveStatusAllowSelect[MOVES_COUNT] =
 	// [MOVE_ELECTRIC_TERRAIN] = TRUE,
 	// [MOVE_PSYCHIC_TERRAIN] = TRUE,
 	[MOVE_SPEED_SWAP] = TRUE,
-	// [MOVE_DOODLE] = TRUE,
+	[MOVE_SMOKESCREEN] = TRUE,
+	[MOVE_SAND_ATTACK] = TRUE,
+	[MOVE_PSYCH_UP] = TRUE,
+	[MOVE_KINESIS] = TRUE,
+	[MOVE_FLASH] = TRUE,
+	[MOVE_DOODLE] = TRUE,
+	[MOVE_HOWL] = TRUE, 
+    [MOVE_COACHING] = TRUE, 
+    [MOVE_DRAGON_CHEER] = TRUE, 
+    [MOVE_ALLY_SWITCH] = TRUE, 
+	[MOVE_SPICY_EXTRACT] = TRUE, 
+	[MOVE_DECORATE] = TRUE,
+	[MOVE_HELPING_HAND] = TRUE
 };
 
 // Moves which should not be counted towards their type counter

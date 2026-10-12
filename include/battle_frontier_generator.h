@@ -33,6 +33,11 @@ struct GeneratorMoves {
     // Allowed Attacking Moves
     u16 allowedAttackingMoves[BFG_MOVE_RATING_LIST_SIZE_ATTACK];
     u8 numAllowedAttackingMoves;
+
+    // Has setup move
+    bool8 hasSetupMove;
+    bool8 hasRecoveryMove; 
+    bool8 hasProtectingMove; 
 };
 
 // Forme / Gimmick not allowed
