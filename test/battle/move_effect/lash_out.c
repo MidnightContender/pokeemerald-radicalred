@@ -11,7 +11,7 @@ SINGLE_BATTLE_TEST("Lash Out damage is boosted if the user's stats are dropped t
     PARAMETRIZE { move = MOVE_LEER; }
     PARAMETRIZE { move = MOVE_STRING_SHOT; }
     PARAMETRIZE { move = MOVE_CONFIDE; }
-    PARAMETRIZE { move = MOVE_SAND_ATTACK; }
+    PARAMETRIZE { move = MOVE_KINESIS; } // Sand Attack lowers Attack in this fork
     PARAMETRIZE { move = MOVE_SWEET_SCENT; }
     PARAMETRIZE { move = MOVE_CHARM; }
     PARAMETRIZE { move = MOVE_SCREECH; }

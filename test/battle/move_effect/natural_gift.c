@@ -50,12 +50,13 @@ SINGLE_BATTLE_TEST("Natural Gift does not remove berry if user is unable to use 
 SINGLE_BATTLE_TEST("Natural Gift removes the berry if user missed")
 {
     GIVEN {
+        ASSUME(GetMoveEffect(MOVE_KINESIS) == EFFECT_ACCURACY_DOWN); // Sand Attack lowers Attack in this fork
         PLAYER(SPECIES_WOBBUFFET) { Item(ITEM_PECHA_BERRY); }
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
-        TURN { MOVE(opponent, MOVE_SAND_ATTACK); MOVE(player, MOVE_NATURAL_GIFT, hit: FALSE); }
+        TURN { MOVE(opponent, MOVE_KINESIS); MOVE(player, MOVE_NATURAL_GIFT, hit: FALSE); }
     } SCENE {
-        ANIMATION(ANIM_TYPE_MOVE, MOVE_SAND_ATTACK, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_KINESIS, opponent);
         NOT ANIMATION(ANIM_TYPE_MOVE, MOVE_NATURAL_GIFT, player);
     } THEN {
         EXPECT(player->item == ITEM_NONE);

@@ -17,7 +17,7 @@ SINGLE_BATTLE_TEST("Freeze Frost restores stat changes when it was succesful")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
-            MOVE(opponent, MOVE_SAND_ATTACK);
+            MOVE(opponent, MOVE_KINESIS); // lowers accuracy so the move can miss; Sand Attack lowers Attack in this fork
             MOVE(player, MOVE_FREEZY_FROST, hit: moveSuccess);
         }
     } SCENE {

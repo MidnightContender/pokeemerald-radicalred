@@ -43,13 +43,14 @@ AI_SINGLE_BATTLE_TEST("AI sees increased base power of Smelling Salt")
         ASSUME(GetMoveEffect(MOVE_SMELLING_SALTS) == EFFECT_DOUBLE_POWER_ON_ARG_STATUS);
         ASSUME(GetMoveEffectArg_Status(MOVE_SMELLING_SALTS) == STATUS1_PARALYSIS);
         AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT);
-        PLAYER(SPECIES_WOBBUFFET) { HP(60); Status1(status1); }
+        // Smelling Salts is Fighting-type in this fork, so use a target that is neutral to both Normal and Fighting.
+        PLAYER(SPECIES_MAGIKARP) { HP(60); Status1(status1); }
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_BODY_SLAM, MOVE_SMELLING_SALTS); }
     } WHEN {
         TURN { EXPECT_MOVE(opponent, expectedMove); }
     } SCENE {
         if (expectedMove == MOVE_SMELLING_SALTS)
-            MESSAGE("Wobbuffet fainted!");
+            MESSAGE("Magikarp fainted!");
     }
 }
 

@@ -27,7 +27,7 @@ SINGLE_BATTLE_TEST("Sappy Seed is not going to seed the target if it fails")
         OPPONENT(SPECIES_WOBBUFFET);
     } WHEN {
         TURN {
-            MOVE(opponent, MOVE_SAND_ATTACK);
+            MOVE(opponent, MOVE_KINESIS); // lowers accuracy so the move can miss; Sand Attack lowers Attack in this fork
             MOVE(player, MOVE_SAPPY_SEED, hit: FALSE);
         }
     } SCENE {

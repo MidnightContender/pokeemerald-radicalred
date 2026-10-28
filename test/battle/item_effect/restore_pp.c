@@ -61,7 +61,7 @@ SINGLE_BATTLE_TEST("Max Elixir restores the PP of all of a battler's moves fully
         EXPECT_EQ(player->pp[0], 35);
         EXPECT_EQ(player->pp[1], 25);
         EXPECT_EQ(player->pp[2], 35);
-        EXPECT_EQ(player->pp[3], 40);
+        EXPECT_EQ(player->pp[3], GetMovePP(MOVE_GROWL)); // 15 in this fork
     }
 }
 

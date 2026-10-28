@@ -452,10 +452,8 @@ static inline bool32 IsMoveSheerForceBoosted(u32 move)
         case MOVE_LIQUIDATION:
         case MOVE_LOW_SWEEP:
         case MOVE_METAL_CLAW:
-        case MOVE_MUD_BOMB:
         case MOVE_MUDDY_WATER:
         case MOVE_MUD_SHOT:
-        case MOVE_MUD_SLAP:
         case MOVE_MYSTICAL_FIRE:
         case MOVE_PLAY_ROUGH:
         case MOVE_POISON_FANG:
@@ -466,7 +464,6 @@ static inline bool32 IsMoveSheerForceBoosted(u32 move)
         case MOVE_POWER_UP_PUNCH:
         case MOVE_PSYBEAM:
         case MOVE_PSYCHIC:
-        case MOVE_RAZOR_SHELL:
         case MOVE_ROCK_CLIMB:
         case MOVE_ROCK_SLIDE:
         case MOVE_ROCK_SMASH:
@@ -544,7 +541,6 @@ static inline bool32 IsMoveSheerForceBoosted(u32 move)
         case MOVE_ICE_BURN:
         case MOVE_INFERNAL_PARADE:
         case MOVE_INFERNO:
-        case MOVE_LEAF_TORNADO:
         case MOVE_LICK:
         case MOVE_LUMINA_CRASH:
         case MOVE_LUNGE:
@@ -553,14 +549,12 @@ static inline bool32 IsMoveSheerForceBoosted(u32 move)
         case MOVE_MALIGNANT_CHAIN:
         case MOVE_MATCHA_GOTCHA:
         case MOVE_METEOR_MASH:
-        case MOVE_MIRROR_SHOT:
         case MOVE_MIST_BALL:
         case MOVE_MOONBLAST:
         case MOVE_MORTAL_SPIN:
         case MOVE_MOUNTAIN_GALE:
         case MOVE_MYSTICAL_POWER:
         case MOVE_NEEDLE_ARM:
-        case MOVE_NIGHT_DAZE:
         case MOVE_NOXIOUS_TORQUE:
         case MOVE_NUZZLE:
         case MOVE_OCTAZOOKA:
@@ -605,6 +599,13 @@ static inline bool32 IsMoveSheerForceBoosted(u32 move)
         case MOVE_ZING_ZAP:
         case MOVE_ELECTRO_SHOT:
         case MOVE_PSYCHIC_NOISE:
+        case MOVE_BLAST_BURN:
+        case MOVE_FLASH:
+        case MOVE_FRENZY_PLANT:
+        case MOVE_FROST_BREATH:
+        case MOVE_HEAD_CHARGE:
+        case MOVE_HYDRO_CANNON:
+        case MOVE_METEOR_ASSAULT:
             return TRUE;
         case MOVE_RAPID_SPIN:
             return B_SPEED_BUFFING_RAPID_SPIN >= GEN_8;
