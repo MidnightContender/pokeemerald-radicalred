@@ -3273,7 +3273,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Inflicts severe damage but\n"
             "makes the user faint."),
         .effect = EFFECT_EXPLOSION,
-        .power = B_UPDATED_MOVE_DATA >= GEN_2 ? 200 : 130,
+        .power = 100,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,
@@ -4153,7 +4153,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             "Inflicts severe damage but\n"
             "makes the user faint."),
         .effect = EFFECT_EXPLOSION,
-        .power = B_UPDATED_MOVE_DATA >= GEN_2 ? 250 : 170,
+        .power = 150,
         .type = TYPE_NORMAL,
         .accuracy = 100,
         .pp = 5,
@@ -19450,14 +19450,15 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .description = COMPOUND_STRING(
             "A user-hurting blast of\n"
             "amassed chlorophyll."),
-        .effect = EFFECT_CHLOROBLAST,
-        .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 150 : 120,
+        .effect = EFFECT_RECOIL,
+        .power = 120,
         .type = TYPE_GRASS,
-        .accuracy = 95,
-        .pp = 5,
+        .accuracy = 100,
+        .pp = 15,
         .target = MOVE_TARGET_SELECTED,
         .priority = 0,
         .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .recoilPercentage = 33 },
         .battleAnimScript = gBattleAnimMove_Chloroblast,
     },
 
