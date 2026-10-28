@@ -8,7 +8,7 @@ SINGLE_BATTLE_TEST("Mirror Armor lowers a stat of the attacking Pokémon")
     PARAMETRIZE { move = MOVE_LEER;        statId = STAT_DEF; }
     PARAMETRIZE { move = MOVE_GROWL;       statId = STAT_ATK; }
     PARAMETRIZE { move = MOVE_SWEET_SCENT; statId = STAT_EVASION; }
-    PARAMETRIZE { move = MOVE_SAND_ATTACK; statId = STAT_ACC; }
+    PARAMETRIZE { move = MOVE_KINESIS;     statId = STAT_ACC; } // Sand Attack lowers Attack in this fork
     PARAMETRIZE { move = MOVE_CONFIDE;     statId = STAT_SPATK; }
     PARAMETRIZE { move = MOVE_FAKE_TEARS;  statId = STAT_SPDEF; }
 

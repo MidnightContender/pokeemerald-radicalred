@@ -5,6 +5,13 @@
 // Unconfirmed by Bulbapedia
 // - Technician interacion
 
+// Radical Red turns Beat Up into a plain 2-5 hit move (EFFECT_MULTI_HIT), so no move in
+// this fork uses EFFECT_BEAT_UP. These tests only run if a move uses the effect again.
+ASSUMPTIONS
+{
+    ASSUME(GetMoveEffect(MOVE_BEAT_UP) == EFFECT_BEAT_UP);
+}
+
 SINGLE_BATTLE_TEST("Beat Up hits the target for each non-fainted, non-statused member in the party")
 {
     u32 gen;

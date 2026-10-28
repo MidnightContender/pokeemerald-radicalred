@@ -5,6 +5,8 @@ ASSUMPTIONS
 {
     ASSUME(GetMoveEffect(MOVE_MIRROR_COAT) == EFFECT_MIRROR_COAT);
     ASSUME(GetMoveEffect(MOVE_COUNTER) == EFFECT_COUNTER);
+    // Radical Red makes Shell Side Arm a plain special move, so these only run if it uses EFFECT_SHELL_SIDE_ARM again.
+    ASSUME(GetMoveEffect(MOVE_SHELL_SIDE_ARM) == EFFECT_SHELL_SIDE_ARM);
 }
 
 SINGLE_BATTLE_TEST("Shell Side Arm can be countered if it is physical")
