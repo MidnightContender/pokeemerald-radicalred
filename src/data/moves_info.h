@@ -21299,6 +21299,142 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_MalignantChain,
     },
 
+    // Radical Red moves
+    [MOVE_SOUL_ROBBERY] =
+    {
+        .name = COMPOUND_STRING("Soul Robbery"),
+        .description = COMPOUND_STRING(
+            "Steals the target's stat\n"
+            "boosts, then attacks."),
+        .effect = EFFECT_SPECTRAL_THIEF,
+        .power = 100,
+        .type = TYPE_PSYCHIC,
+        .accuracy = 100,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .ignoresSubstitute = TRUE,
+        .metronomeBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_SpectralThief,
+    },
+
+    [MOVE_DARK_HOLE] =
+    {
+        .name = COMPOUND_STRING("Dark Hole"),
+        .description = COMPOUND_STRING(
+            "Sends the foe to the shadow\n"
+            "realm. May cause sleep."),
+        .effect = EFFECT_HIT,
+        .power = 100,
+        .type = TYPE_DARK,
+        .accuracy = 100,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_SLEEP,
+            .chance = 40,
+        }),
+        .battleAnimScript = gBattleAnimMove_DarkPulse,
+    },
+
+    [MOVE_LEECH_FANG] =
+    {
+        .name = COMPOUND_STRING("Leech Fang"),
+        .description = COMPOUND_STRING(
+            "A bite that steals half\n"
+            "the damage inflicted."),
+        .effect = EFFECT_ABSORB,
+        .power = 80,
+        .type = TYPE_BUG,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .argument = { .absorbPercentage = 50 },
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .healingMove = B_HEAL_BLOCKING >= GEN_6,
+        .battleAnimScript = gBattleAnimMove_LeechLife,
+    },
+
+    [MOVE_METAL_BASH] =
+    {
+        .name = COMPOUND_STRING("Metal Bash"),
+        .description = COMPOUND_STRING(
+            "Charges into the foe with\n"
+            "a steel-hard body."),
+        .effect = EFFECT_HIT,
+        .power = 40,
+        .type = TYPE_STEEL,
+        .accuracy = 100,
+        .pp = 35,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_IronHead,
+    },
+
+    [MOVE_AQUA_FANG] =
+    {
+        .name = COMPOUND_STRING("Aqua Fang"),
+        .description = COMPOUND_STRING(
+            "Bites the foe with\n"
+            "aquatic force."),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .type = TYPE_WATER,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .bitingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_FishiousRend,
+    },
+
+    [MOVE_SONIC_SLASH] =
+    {
+        .name = COMPOUND_STRING("Sonic Slash"),
+        .description = COMPOUND_STRING(
+            "A swift slash that does more\n"
+            "damage to slower foes."),
+        .effect = EFFECT_ELECTRO_BALL,
+        .power = 1,
+        .type = TYPE_FLYING,
+        .accuracy = 100,
+        .pp = 10,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .slicingMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_AerialAce,
+    },
+
+    [MOVE_SOUPERCELL_SLAM] =
+    {
+        .name = COMPOUND_STRING("Soupercell Slam"),
+        .description = COMPOUND_STRING(
+            "An electric slam. If it\n"
+            "misses, the user is hurt."),
+        .effect = EFFECT_RECOIL_IF_MISS,
+        .power = 120,
+        .type = TYPE_ELECTRIC,
+        .accuracy = 95,
+        .pp = 15,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        .battleAnimScript = gBattleAnimMove_VoltTackle,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

@@ -4713,6 +4713,15 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, u32 battler, enum Ability ab
                     effect++;
                 }
                 break;
+            case ABILITY_SELF_SUFFICIENT:
+                if (!IsBattlerAtMaxHp(battler)
+                 && !gBattleMons[battler].volatiles.healBlock)
+                {
+                    SetHealAmount(battler, GetNonDynamaxMaxHP(battler) / 16);
+                    BattleScriptExecute(BattleScript_RainDishActivates);
+                    effect++;
+                }
+                break;
             case ABILITY_HYDRATION:
                 if (IsBattlerWeatherAffected(battler, B_WEATHER_RAIN)
                  && gBattleMons[battler].status1 & STATUS1_ANY)
@@ -7452,6 +7461,10 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         if (IsPunchingMove(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
         break;
+    case ABILITY_STRIKER:
+        if (IsKickingMove(move))
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
+        break;
     case ABILITY_SHEER_FORCE:
         if (MoveIsAffectedBySheerForce(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
@@ -7769,6 +7782,10 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
     case ABILITY_HUGE_POWER:
     case ABILITY_PURE_POWER:
         if (IsBattleMovePhysical(move))
+            modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
+        break;
+    case ABILITY_FELINE_PROWESS:
+        if (IsBattleMoveSpecial(move))
             modifier = uq4_12_multiply_half_down(modifier, UQ_4_12(2.0));
         break;
     case ABILITY_SLOW_START:
@@ -10603,9 +10620,36 @@ bool32 DoesDestinyBondFail(u32 battler)
 }
 
 // This check has always to be the last in a condtion statement because of the recording of AI data.
+// Moves boosted by Striker
+bool32 IsKickingMove(u32 move)
+{
+    switch (move)
+    {
+    case MOVE_DOUBLE_KICK:
+    case MOVE_MEGA_KICK:
+    case MOVE_JUMP_KICK:
+    case MOVE_ROLLING_KICK:
+    case MOVE_HIGH_JUMP_KICK:
+    case MOVE_LOW_KICK:
+    case MOVE_TRIPLE_KICK:
+    case MOVE_BLAZE_KICK:
+    case MOVE_TROP_KICK:
+    case MOVE_THUNDEROUS_KICK:
+    case MOVE_TRIPLE_AXEL:
+    case MOVE_AXE_KICK:
+    case MOVE_STOMP:
+    case MOVE_STOMPING_TANTRUM:
+    case MOVE_LOW_SWEEP:
+    case MOVE_PYRO_BALL:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 bool32 IsMoveEffectBlockedByTarget(enum Ability ability)
 {
-    if (ability == ABILITY_SHIELD_DUST)
+    if (ability == ABILITY_SHIELD_DUST || ability == ABILITY_FROZEN_MIST)
     {
         RecordAbilityBattle(gBattlerTarget, ability);
         return TRUE;

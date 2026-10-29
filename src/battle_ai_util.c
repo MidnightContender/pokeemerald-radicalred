@@ -728,7 +728,7 @@ bool32 IsAdditionalEffectBlocked(u32 battlerAtk, u32 abilityAtk, u32 battlerDef,
     if (gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK)
         return TRUE;
 
-    if (abilityDef == ABILITY_SHIELD_DUST && !IsMoldBreakerTypeAbility(battlerAtk, abilityAtk))
+    if ((abilityDef == ABILITY_SHIELD_DUST || abilityDef == ABILITY_FROZEN_MIST) && !IsMoldBreakerTypeAbility(battlerAtk, abilityAtk))
         return TRUE;
 
     return FALSE;
@@ -2210,6 +2210,7 @@ bool32 CanLowerStat(u32 battlerAtk, u32 battlerDef, struct AiLogicData *aiData, 
         case ABILITY_FULL_METAL_BODY:
             return FALSE;
         case ABILITY_SHIELD_DUST:
+        case ABILITY_FROZEN_MIST:
             if (!IsBattleMoveStatus(move) && GetActiveGimmick(battlerAtk) != GIMMICK_DYNAMAX)
                 return FALSE;
             break;
@@ -3736,7 +3737,7 @@ bool32 AI_CanBeInfatuated(u32 battlerAtk, u32 battlerDef, enum Ability defAbilit
 u32 ShouldTryToFlinch(u32 battlerAtk, u32 battlerDef, enum Ability atkAbility, enum Ability defAbility, u32 move)
 {
     u32 predictedMoveSpeedCheck = GetIncomingMoveSpeedCheck(battlerAtk, battlerDef, gAiLogicData);
-    if (((!IsMoldBreakerTypeAbility(battlerAtk, gAiLogicData->abilities[battlerAtk]) && (defAbility == ABILITY_SHIELD_DUST || defAbility == ABILITY_INNER_FOCUS))
+    if (((!IsMoldBreakerTypeAbility(battlerAtk, gAiLogicData->abilities[battlerAtk]) && (defAbility == ABILITY_SHIELD_DUST || defAbility == ABILITY_FROZEN_MIST || defAbility == ABILITY_INNER_FOCUS))
       || gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
       || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
       || AI_IsSlower(battlerAtk, battlerDef, move, predictedMoveSpeedCheck, CONSIDER_PRIORITY))) // Opponent goes first
@@ -3799,7 +3800,7 @@ bool32 IsFlinchGuaranteed(u32 battlerAtk, u32 battlerDef, u32 move)
             if (gAiLogicData->holdEffects[battlerDef] == HOLD_EFFECT_COVERT_CLOAK
             || DoesSubstituteBlockMove(battlerAtk, battlerDef, move)
             || (!IsMoldBreakerTypeAbility(battlerAtk, gAiLogicData->abilities[battlerAtk])
-            && (gAiLogicData->abilities[battlerDef] == ABILITY_SHIELD_DUST || gAiLogicData->abilities[battlerDef] == ABILITY_INNER_FOCUS)))
+            && (gAiLogicData->abilities[battlerDef] == ABILITY_SHIELD_DUST || gAiLogicData->abilities[battlerDef] == ABILITY_FROZEN_MIST || gAiLogicData->abilities[battlerDef] == ABILITY_INNER_FOCUS)))
                 return FALSE;
             else
                 return TRUE;
@@ -5605,7 +5606,7 @@ bool32 AI_ShouldSetUpHazards(u32 battlerAtk, u32 battlerDef, u32 move, struct Ai
     {
         if (DoesBattlerIgnoreAbilityChecks(battlerAtk, aiData->abilities[battlerAtk], move))
             return TRUE;
-        if (aiData->abilities[battlerDef] == ABILITY_SHIELD_DUST)
+        if (aiData->abilities[battlerDef] == ABILITY_SHIELD_DUST || aiData->abilities[battlerDef] == ABILITY_FROZEN_MIST)
             return FALSE;
     }
     return TRUE;
@@ -6074,6 +6075,10 @@ s32 BattlerBenefitsFromAbilityScore(u32 battler, enum Ability ability, struct Ai
     case ABILITY_HUGE_POWER:
     case ABILITY_PURE_POWER:
         if (HasMoveWithCategory(battler, DAMAGE_CATEGORY_PHYSICAL))
+            return BEST_EFFECT;
+        break;
+    case ABILITY_FELINE_PROWESS:
+        if (HasMoveWithCategory(battler, DAMAGE_CATEGORY_SPECIAL))
             return BEST_EFFECT;
         break;
     // Also used to Worry Seed WORRY_SEED
