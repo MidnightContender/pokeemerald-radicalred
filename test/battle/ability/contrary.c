@@ -165,7 +165,7 @@ SINGLE_BATTLE_TEST("Contrary raises a stat after using a move which would normal
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_GROWL) == EFFECT_ATTACK_DOWN);
         PLAYER(SPECIES_WOBBUFFET) { Speed(3); }
-        OPPONENT(SPECIES_SPINDA) { Ability(ability); Speed(2); }
+        OPPONENT(SPECIES_SPINDA) { Ability(ability); Speed(2); Attack(125); }
     } WHEN {
         TURN { MOVE(player, MOVE_GROWL); MOVE(opponent, MOVE_SCRATCH); }
     } SCENE {
@@ -196,7 +196,7 @@ SINGLE_BATTLE_TEST("Contrary lowers a stat after using a move which would normal
     GIVEN {
         ASSUME(GetMoveEffect(MOVE_BELLY_DRUM) == EFFECT_BELLY_DRUM);
         PLAYER(SPECIES_WOBBUFFET);
-        OPPONENT(SPECIES_SPINDA) { Ability(ability); }
+        OPPONENT(SPECIES_SPINDA) { Ability(ability); Attack(125); }
     } WHEN {
         TURN { MOVE(opponent, MOVE_SCRATCH); }
         TURN { MOVE(opponent, MOVE_BELLY_DRUM); }
