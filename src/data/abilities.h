@@ -2412,4 +2412,37 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
     },
+
+    // Radical Red
+    [ABILITY_FELINE_PROWESS] =
+    {
+        .name = _("Feline Prowess"),
+        .description = COMPOUND_STRING("Raises Sp. Atk."),
+        .aiRating = 10,
+    },
+    [ABILITY_STRIKER] =
+    {
+        .name = _("Striker"),
+        .description = COMPOUND_STRING("Boosts kicking moves."),
+        .aiRating = 6,
+    },
+    [ABILITY_SELF_SUFFICIENT] =
+    {
+        .name = _("Self Sufficient"),
+        .description = COMPOUND_STRING("Heals a little each turn."),
+        .aiRating = 4,
+    },
+    [ABILITY_BLAZING_SOUL] =
+    {
+        .name = _("Blazing Soul"),
+        .description = COMPOUND_STRING("Fire moves go first."),
+        .aiRating = 6,
+    },
+    [ABILITY_FROZEN_MIST] =
+    {
+        .name = _("Frozen Mist"),
+        .description = COMPOUND_STRING("Blocks hazards, effects."),
+        .aiRating = 6,
+        .breakable = TRUE,
+    },
 };

@@ -380,6 +380,7 @@ static bool32 HandleEndTurnFirstEventBlock(u32 battler)
         case ABILITY_HEALER:
         case ABILITY_HYDRATION:
         case ABILITY_SHED_SKIN:
+        case ABILITY_SELF_SUFFICIENT:
             if (AbilityBattleEffects(ABILITYEFFECT_ENDTURN, battler, ability, 0, MOVE_NONE))
                 effect = TRUE;
             break;

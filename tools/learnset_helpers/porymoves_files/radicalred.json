@@ -325,6 +325,7 @@
       "MOVE_PLAY_ROUGH"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
@@ -777,6 +778,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
@@ -2000,6 +2002,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -3174,6 +3177,7 @@
       "MOVE_ZEN_HEADBUTT",
       "MOVE_BULLET_SEED",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
       "MOVE_LIGHT_SCREEN",
@@ -3245,6 +3249,7 @@
     "EggMoves": [],
     "TutorMoves": [
       "MOVE_WORK_UP",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_IRON_DEFENSE",
       "MOVE_TAILWIND",
@@ -6887,6 +6892,10 @@
         "Move": "MOVE_FINAL_GAMBIT"
       },
       {
+        "Level": 42,
+        "Move": "MOVE_AQUA_FANG"
+      },
+      {
         "Level": 46,
         "Move": "MOVE_HEAD_SMASH"
       },
@@ -7938,6 +7947,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -9542,6 +9552,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_THUNDERBOLT",
@@ -9893,6 +9904,7 @@
       "MOVE_SUCKER_PUNCH"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_TAILWIND",
       "MOVE_DRILL_RUN",
       "MOVE_FOUL_PLAY",
@@ -11457,6 +11469,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_SUBSTITUTE",
       "MOVE_BODY_SLAM",
       "MOVE_SUNNY_DAY",
@@ -11515,6 +11528,10 @@
       {
         "Level": 44,
         "Move": "MOVE_WAVE_CRASH"
+      },
+      {
+        "Level": 48,
+        "Move": "MOVE_AQUA_FANG"
       }
     ],
     "TMMoves": [
@@ -12669,6 +12686,7 @@
     ],
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_SWORDS_DANCE",
       "MOVE_SPIKES",
@@ -16367,6 +16385,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_SWORDS_DANCE",
       "MOVE_SUBSTITUTE",
       "MOVE_ICE_FANG",
@@ -17037,6 +17056,7 @@
     "EggMoves": [],
     "TutorMoves": [
       "MOVE_FLAME_CHARGE",
+      "MOVE_DARK_HOLE",
       "MOVE_SUBSTITUTE",
       "MOVE_NASTY_PLOT",
       "MOVE_SUNNY_DAY",
@@ -19200,6 +19220,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -20672,6 +20693,7 @@
       "MOVE_SLASH"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_IRON_DEFENSE",
       "MOVE_DRAGON_DANCE",
       "MOVE_SNOWSCAPE",
@@ -22159,6 +22181,7 @@
       "MOVE_DRAGON_CLAW",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_HYPER_VOICE",
@@ -22454,6 +22477,10 @@
       {
         "Level": 71,
         "Move": "MOVE_OMINOUS_WIND"
+      },
+      {
+        "Level": 81,
+        "Move": "MOVE_DARK_HOLE"
       }
     ],
     "TMMoves": [
@@ -22498,6 +22525,7 @@
     "EggMoves": [],
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
@@ -27838,6 +27866,10 @@
       {
         "Level": 66,
         "Move": "MOVE_HEAD_SMASH"
+      },
+      {
+        "Level": 72,
+        "Move": "MOVE_AQUA_FANG"
       }
     ],
     "TMMoves": [
@@ -30568,6 +30600,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_HYDRO_PUMP",
@@ -31099,6 +31132,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -31245,6 +31279,7 @@
       "MOVE_CLOSE_COMBAT",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
@@ -31511,6 +31546,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -31643,6 +31679,7 @@
       "MOVE_TOXIC",
       "MOVE_BULLET_SEED",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -31744,6 +31781,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -34639,6 +34677,10 @@
       {
         "Level": 42,
         "Move": "MOVE_THRASH"
+      },
+      {
+        "Level": 45,
+        "Move": "MOVE_AQUA_FANG"
       },
       {
         "Level": 48,
@@ -40198,6 +40240,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
       "MOVE_THUNDERBOLT",
@@ -42647,6 +42690,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -44961,6 +45005,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
       "MOVE_THUNDERBOLT",
@@ -45094,6 +45139,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -45494,6 +45540,7 @@
     "TutorMoves": [
       "MOVE_WORK_UP",
       "MOVE_POWER_UP_PUNCH",
+      "MOVE_DARK_HOLE",
       "MOVE_SWORDS_DANCE",
       "MOVE_HYDRO_CANNON",
       "MOVE_SPIKES",
@@ -45879,6 +45926,7 @@
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_BULK_UP",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
@@ -47381,6 +47429,7 @@
     "EggMoves": [],
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
+      "MOVE_DARK_HOLE",
       "MOVE_IRON_DEFENSE",
       "MOVE_SUBSTITUTE",
       "MOVE_BODY_SLAM"
@@ -47411,6 +47460,10 @@
       {
         "Level": 27,
         "Move": "MOVE_ICE_FANG"
+      },
+      {
+        "Level": 30,
+        "Move": "MOVE_AQUA_FANG"
       },
       {
         "Level": 33,
@@ -50006,6 +50059,7 @@
     ],
     "TutorMoves": [
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_TAILWIND",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
@@ -50235,6 +50289,7 @@
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
@@ -50359,6 +50414,7 @@
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
@@ -50856,6 +50912,7 @@
     "TutorMoves": [
       "MOVE_FLAME_CHARGE",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
       "MOVE_NASTY_PLOT",
@@ -51303,6 +51360,10 @@
         "Move": "MOVE_CRUNCH"
       },
       {
+        "Level": 50,
+        "Move": "MOVE_AQUA_FANG"
+      },
+      {
         "Level": 57,
         "Move": "MOVE_SHELL_SMASH"
       },
@@ -51345,6 +51406,7 @@
       "MOVE_ENDURE"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_IRON_DEFENSE",
       "MOVE_SNOWSCAPE",
       "MOVE_SUBSTITUTE",
@@ -51600,6 +51662,7 @@
     "TutorMoves": [
       "MOVE_WORK_UP",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_TAILWIND",
       "MOVE_DRAGON_DANCE",
@@ -52230,6 +52293,7 @@
       "MOVE_WORK_UP",
       "MOVE_POWER_UP_PUNCH",
       "MOVE_FLAME_CHARGE",
+      "MOVE_DARK_HOLE",
       "MOVE_BULK_UP",
       "MOVE_SWORDS_DANCE",
       "MOVE_BLAST_BURN",
@@ -53118,6 +53182,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -53243,6 +53308,7 @@
       "MOVE_CLOSE_COMBAT",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
       "MOVE_THUNDERBOLT",
@@ -53387,6 +53453,7 @@
     "EggMoves": [],
     "TutorMoves": [
       "MOVE_WORK_UP",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_TAILWIND",
       "MOVE_SUBSTITUTE",
@@ -53706,6 +53773,7 @@
       "MOVE_DRAGON_CLAW",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
@@ -53835,6 +53903,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
       "MOVE_THUNDER",
@@ -56225,6 +56294,7 @@
       "MOVE_TOXIC",
       "MOVE_HEAT_WAVE",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
       "MOVE_WEATHER_BALL",
@@ -58502,6 +58572,7 @@
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_BULK_UP",
       "MOVE_FOUL_PLAY",
       "MOVE_STEALTH_ROCK",
@@ -61008,6 +61079,7 @@
       "MOVE_QUICK_ATTACK"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
       "MOVE_NASTY_PLOT",
@@ -62167,6 +62239,7 @@
       "MOVE_COUNTER"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_BUG_BITE",
       "MOVE_SWORDS_DANCE",
       "MOVE_SUBSTITUTE",
@@ -63876,6 +63949,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_THUNDERBOLT",
@@ -63913,6 +63987,7 @@
       "MOVE_FAKE_TEARS"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_SUBSTITUTE",
       "MOVE_NASTY_PLOT",
@@ -65905,6 +65980,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -69463,6 +69539,7 @@
     "TutorMoves": [
       "MOVE_WORK_UP",
       "MOVE_POWER_UP_PUNCH",
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_FRENZY_PLANT",
       "MOVE_SPIKES",
@@ -70581,6 +70658,7 @@
       "MOVE_ZEN_HEADBUTT",
       "MOVE_BULLET_SEED",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
@@ -70701,6 +70779,7 @@
       "MOVE_POWER_UP_PUNCH",
       "MOVE_FLAME_CHARGE",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_BUG_BITE",
       "MOVE_IRON_DEFENSE",
@@ -70828,6 +70907,10 @@
       {
         "Level": 93,
         "Move": "MOVE_ME_FIRST"
+      },
+      {
+        "Level": 100,
+        "Move": "MOVE_SOUL_ROBBERY"
       }
     ],
     "TMMoves": [
@@ -72302,6 +72385,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -72758,6 +72842,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_TAILWIND",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
@@ -73202,6 +73287,7 @@
     ],
     "TutorMoves": [
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_CHARGE_BEAM",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
@@ -74483,6 +74569,7 @@
     ],
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
+      "MOVE_DARK_HOLE",
       "MOVE_PAIN_SPLIT",
       "MOVE_ROCK_POLISH",
       "MOVE_SUBSTITUTE",
@@ -76837,6 +76924,10 @@
       {
         "Level": 47,
         "Move": "MOVE_X_SCISSOR"
+      },
+      {
+        "Level": 54,
+        "Move": "MOVE_SONIC_SLASH"
       }
     ],
     "TMMoves": [
@@ -77850,6 +77941,7 @@
       "MOVE_SEED_BOMB",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
@@ -78833,6 +78925,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -79570,6 +79663,7 @@
       "MOVE_ACID_SPRAY"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_SNOWSCAPE",
       "MOVE_SWORDS_DANCE",
@@ -81585,6 +81679,7 @@
       "MOVE_SEED_BOMB",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
       "MOVE_THUNDERBOLT",
@@ -84056,6 +84151,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_PROTECT",
       "MOVE_HYDRO_PUMP",
       "MOVE_THUNDERBOLT",
@@ -86522,6 +86618,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -88646,6 +88743,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -88967,6 +89065,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_WEATHER_BALL",
@@ -89210,6 +89309,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
       "MOVE_PROTECT",
@@ -90395,6 +90495,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -91566,6 +91667,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
       "MOVE_PROTECT",
@@ -91711,6 +91813,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
       "MOVE_PROTECT",
@@ -91865,6 +91968,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
       "MOVE_PROTECT",
@@ -95322,6 +95426,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -98177,6 +98282,10 @@
       {
         "Level": 56,
         "Move": "MOVE_TAUNT"
+      },
+      {
+        "Level": 75,
+        "Move": "MOVE_AQUA_FANG"
       }
     ],
     "TMMoves": [
@@ -98223,6 +98332,7 @@
     ],
     "TutorMoves": [
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_SNOWSCAPE",
       "MOVE_SUBSTITUTE",
       "MOVE_ICE_FANG",
@@ -101846,6 +101956,7 @@
       "MOVE_PLAY_ROUGH"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_TOXIC_SPIKES",
       "MOVE_SUBSTITUTE",
@@ -104488,6 +104599,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_BLIZZARD",
       "MOVE_PROTECT",
@@ -106148,6 +106260,7 @@
     ],
     "TutorMoves": [
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_PAIN_SPLIT",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
@@ -107513,6 +107626,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_PROTECT",
       "MOVE_IRON_HEAD",
@@ -111210,6 +111324,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
@@ -112533,6 +112648,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ICE_BEAM",
       "MOVE_PROTECT",
       "MOVE_HYPER_VOICE",
@@ -112783,6 +112899,7 @@
       "MOVE_TORMENT"
     ],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
       "MOVE_NASTY_PLOT",
@@ -112991,6 +113108,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
@@ -113356,6 +113474,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_STEALTH_ROCK",
       "MOVE_SPIKES",
       "MOVE_SUBSTITUTE",
@@ -117964,6 +118083,7 @@
     "TutorMoves": [
       "MOVE_POWER_UP_PUNCH",
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_IRON_DEFENSE",
       "MOVE_DRAGON_DANCE",
       "MOVE_FOUL_PLAY",
@@ -118676,6 +118796,7 @@
       "MOVE_ROAR",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_PROTECT",
       "MOVE_HYPER_VOICE",
       "MOVE_EARTHQUAKE",
@@ -121246,6 +121367,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_ELECTROWEB",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
@@ -125858,6 +125980,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
       "MOVE_BODY_SLAM",
@@ -127289,6 +127412,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_TAILWIND",
       "MOVE_FOUL_PLAY",
       "MOVE_SUBSTITUTE",
@@ -127683,6 +127807,7 @@
       "MOVE_TOXIC",
       "MOVE_HEAT_WAVE",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_WEATHER_BALL",
@@ -127939,6 +128064,7 @@
     ],
     "EggMoves": [],
     "TutorMoves": [
+      "MOVE_DARK_HOLE",
       "MOVE_BULK_UP",
       "MOVE_FOUL_PLAY",
       "MOVE_SWORDS_DANCE",
@@ -128030,6 +128156,7 @@
     "TMMoves": [
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_THUNDERBOLT",
@@ -128133,6 +128260,7 @@
       "MOVE_TOXIC",
       "MOVE_ZEN_HEADBUTT",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_LIGHT_SCREEN",
       "MOVE_PROTECT",
       "MOVE_HYPER_VOICE",
@@ -128258,6 +128386,7 @@
       "MOVE_CLOSE_COMBAT",
       "MOVE_TOXIC",
       "MOVE_HIDDEN_POWER",
+      "MOVE_SOUPERCELL_SLAM",
       "MOVE_TAUNT",
       "MOVE_ELECTROWEB",
       "MOVE_PROTECT",
@@ -128651,6 +128780,7 @@
     ],
     "TutorMoves": [
       "MOVE_UPROAR",
+      "MOVE_DARK_HOLE",
       "MOVE_CALM_MIND",
       "MOVE_FOUL_PLAY",
       "MOVE_SWORDS_DANCE",
