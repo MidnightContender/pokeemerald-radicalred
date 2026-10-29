@@ -2445,4 +2445,56 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .aiRating = 6,
         .breakable = TRUE,
     },
+
+    [ABILITY_FATAL_PRECISION] =
+    {
+        .name = _("Fatal Precision"),
+        .description = COMPOUND_STRING("Super effective hits land."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_BULL_RUSH] =
+    {
+        .name = _("Bull Rush"),
+        .description = COMPOUND_STRING("Faster, stronger on entry."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_QUILL_RUSH] =
+    {
+        .name = _("Quill Rush"),
+        .description = COMPOUND_STRING("Faster, stronger on entry."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_SAGE_POWER] =
+    {
+        .name = _("Sage Power"),
+        .description = COMPOUND_STRING("Ups Sp. Atk, locks move."),
+        .aiRating = 4,
+    },
+
+    [ABILITY_BONE_ZONE] =
+    {
+        .name = _("Bone Zone"),
+        .description = COMPOUND_STRING("Bone moves hit fully."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_BAD_COMPANY] =
+    {
+        .name = _("Bad Company"),
+        .description = COMPOUND_STRING("No recoil or self-drops."),
+        .aiRating = 6,
+    },
+
+    [ABILITY_PHOENIX_DOWN] =
+    {
+        .name = _("Phoenix Down"),
+        .description = COMPOUND_STRING("Revives once at half HP."),
+        .aiRating = 8,
+        .cantBeCopied = TRUE,
+        .cantBeSwapped = TRUE,
+        .cantBeTraced = TRUE,
+    },
 };

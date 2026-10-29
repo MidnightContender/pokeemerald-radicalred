@@ -6625,6 +6625,14 @@ BattleScript_RainDishActivates::
 	call BattleScript_AbilityHpHeal
 	end2
 
+BattleScript_PhoenixDownActivates::
+	call BattleScript_AbilityPopUpScripting
+	healthbarupdate BS_SCRIPTING, PASSIVE_HP_UPDATE
+	datahpupdate BS_SCRIPTING, PASSIVE_HP_UPDATE
+	printstring STRINGID_PHOENIXDOWNREVIVED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
 BattleScript_CheekPouchActivates::
 	copybyte sSAVED_BATTLER, gBattlerAttacker
 	copybyte gBattlerAttacker, gBattlerAbility

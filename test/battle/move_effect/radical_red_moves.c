@@ -109,3 +109,54 @@ SINGLE_BATTLE_TEST("Sonic Slash does more damage the faster the user is", s16 da
         EXPECT_GT(results[1].damage, results[0].damage);
     }
 }
+
+SINGLE_BATTLE_TEST("Draco Barrage hits Fairy types and hurts the user by a third of the damage")
+{
+    s16 damage, recoil;
+    GIVEN {
+        ASSUME(GetSpeciesType(SPECIES_CLEFAIRY, 0) == TYPE_FAIRY);
+        PLAYER(SPECIES_HYDREIGON);
+        OPPONENT(SPECIES_CLEFAIRY);
+    } WHEN {
+        TURN { MOVE(player, MOVE_DRACO_BARRAGE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DRACO_BARRAGE, player);
+        HP_BAR(opponent, captureDamage: &damage);
+        HP_BAR(player, captureDamage: &recoil);
+    } THEN {
+        EXPECT_GT(damage, 0);
+        EXPECT_EQ(recoil, damage * 33 / 100);
+    }
+}
+
+SINGLE_BATTLE_TEST("Draco Barrage becomes physical when the user's Attack is higher", s16 damage)
+{
+    u32 move;
+    PARAMETRIZE { move = MOVE_REFLECT; }
+    PARAMETRIZE { move = MOVE_CELEBRATE; }
+    GIVEN {
+        PLAYER(SPECIES_HYDREIGON) { Attack(300); SpAttack(50); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, move); MOVE(player, MOVE_DRACO_BARRAGE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_LT(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Forbidden Spell calls one of its eight moves at random")
+{
+    GIVEN {
+        PLAYER(SPECIES_CHIMECHO);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_FORBIDDEN_SPELL, WITH_RNG(RNG_METRONOME, 0)); }
+    } SCENE {
+        MESSAGE("Chimecho used Forbidden Spell!");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHELL_SMASH, player);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_SPATK], DEFAULT_STAT_STAGE + 2);
+    }
+}

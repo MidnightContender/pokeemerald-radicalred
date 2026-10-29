@@ -2905,7 +2905,7 @@ void StealTargetItem(u8 battlerStealer, u8 itemBattler)
     BtlController_EmitSetMonData(itemBattler, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[itemBattler].item), &gBattleMons[itemBattler].item);  // remove target item
     MarkBattlerForControllerExec(itemBattler);
 
-    if (GetBattlerAbility(itemBattler) != ABILITY_GORILLA_TACTICS)
+    if (!IsChoiceLockingAbility(GetBattlerAbility(itemBattler)))
         gBattleStruct->choicedMove[itemBattler] = MOVE_NONE;
 
     TrySaveExchangedItem(itemBattler, gLastUsedItem);
@@ -4307,6 +4307,20 @@ static void Cmd_tryfaintmon(void)
 
         if (cmd->battler == BS_TARGET && gCurrentMove != MOVE_NONE)
             TryUpdateEvolutionTracker(IF_DEFEAT_X_WITH_ITEMS, 1, MOVE_NONE);
+
+        if (!(gAbsentBattlerFlags & (1u << battler))
+         && !IsBattlerAlive(battler)
+         && GetBattlerAbility(battler) == ABILITY_PHOENIX_DOWN
+         && !gBattleStruct->partyState[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].phoenixDownUsed)
+        {
+            gBattleStruct->partyState[GetBattlerSide(battler)][gBattlerPartyIndexes[battler]].phoenixDownUsed = TRUE;
+            gBattleScripting.battler = battler;
+            gLastUsedAbility = ABILITY_PHOENIX_DOWN;
+            SetHealAmount(battler, GetNonDynamaxMaxHP(battler) / 2);
+            BattleScriptPush(cmd->nextInstr);
+            gBattlescriptCurrInstr = BattleScript_PhoenixDownActivates;
+            return;
+        }
 
         gBattlerFainted = battler;
         faintScript = BattleScript_FaintBattler;
@@ -5826,7 +5840,7 @@ static bool32 HandleMoveEndMoveBlock(u32 moveEffect)
             }
             gLastUsedItem = gBattleMons[gBattlerTarget].item;
             gBattleMons[gBattlerTarget].item = 0;
-            if (gBattleMons[gBattlerTarget].ability != ABILITY_GORILLA_TACTICS)
+            if (!IsChoiceLockingAbility(gBattleMons[gBattlerTarget].ability))
                 gBattleStruct->choicedMove[gBattlerTarget] = MOVE_NONE;
             CheckSetUnburden(gBattlerTarget);
 
@@ -5961,6 +5975,7 @@ static bool32 HandleMoveEndMoveBlock(u32 moveEffect)
         {
             enum Ability ability = GetBattlerAbility(gBattlerAttacker);
             if (IsAbilityAndRecord(gBattlerAttacker, ability, ABILITY_ROCK_HEAD)
+             || IsAbilityAndRecord(gBattlerAttacker, ability, ABILITY_BAD_COMPANY)
              || IsAbilityAndRecord(gBattlerAttacker, ability, ABILITY_MAGIC_GUARD))
                 break;
 
@@ -5996,6 +6011,7 @@ static bool32 HandleMoveEndMoveBlock(u32 moveEffect)
         {
             enum Ability ability = GetBattlerAbility(gBattlerAttacker);
             if (IsAbilityAndRecord(gBattlerAttacker, ability, ABILITY_ROCK_HEAD)
+             || IsAbilityAndRecord(gBattlerAttacker, ability, ABILITY_BAD_COMPANY)
              || IsAbilityAndRecord(gBattlerAttacker, ability, ABILITY_MAGIC_GUARD))
                 break;
 
@@ -10322,7 +10338,14 @@ static u32 ChangeStatBuffs(u32 battler, s8 statValue, enum Stat statId, union St
 
     if (statValue <= -1) // Stat decrease.
     {
-        if (gSideTimers[GetBattlerSide(battler)].mistTimer
+        if (battlerAbility == ABILITY_BAD_COMPANY && battler == gBattlerAttacker && gCurrentMove != MOVE_NONE
+         && !flags.statDropPrevention && !flags.mirrorArmored)
+        {
+            if (flags.allowPtr)
+                gBattlescriptCurrInstr = BS_ptr;
+            return STAT_CHANGE_DIDNT_WORK;
+        }
+        else if (gSideTimers[GetBattlerSide(battler)].mistTimer
             && !flags.certain && gCurrentMove != MOVE_CURSE
             && !(battler == gBattlerTarget && GetBattlerAbility(gBattlerAttacker) == ABILITY_INFILTRATOR && !IsBattlerAlly(gBattlerAttacker, battler)))
         {
@@ -12798,9 +12821,9 @@ static void Cmd_tryswapitems(void)
             BtlController_EmitSetMonData(gBattlerTarget, B_COMM_TO_CONTROLLER, REQUEST_HELDITEM_BATTLE, 0, sizeof(gBattleMons[gBattlerTarget].item), &gBattleMons[gBattlerTarget].item);
             MarkBattlerForControllerExec(gBattlerTarget);
 
-            if (GetBattlerAbility(gBattlerTarget) != ABILITY_GORILLA_TACTICS)
+            if (!IsChoiceLockingAbility(GetBattlerAbility(gBattlerTarget)))
                 gBattleStruct->choicedMove[gBattlerTarget] = MOVE_NONE;
-            if (GetBattlerAbility(gBattlerAttacker) != ABILITY_GORILLA_TACTICS)
+            if (!IsChoiceLockingAbility(GetBattlerAbility(gBattlerAttacker)))
                 gBattleStruct->choicedMove[gBattlerAttacker] = MOVE_NONE;
 
             gBattlescriptCurrInstr = cmd->nextInstr;
