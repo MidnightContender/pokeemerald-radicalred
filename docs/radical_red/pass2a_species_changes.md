@@ -524,6 +524,7 @@ Changed to match the Radical Red dex ([JwowSquared/Radical-Red-Pokedex](https://
 | Flittle |  |  | Anticipation / Frisk / Speed Boost → Frisk / Speed Boost / — |
 | Veluza | HP 90→95, Def 73→83, SpD 65→75 |  |  |
 | Capsakid | HP 50→52 |  | Chlorophyll / Insomnia / Klutz → Chlorophyll / Insomnia / — |
+| Scream Tail | SpA 65→85 |  | Protosynthesis / — / — → Protosynthesis / — / Tangling Hair |
 | Scovillain | HP 65→85, Atk 108→78, SpA 108→118 |  | Chlorophyll / Insomnia / Moody → Chlorophyll / Insomnia / — |
 | Cetoddle |  |  | Thick Fat / Snow Cloak / Sheer Force → Thick Fat / Slush Rush / Sheer Force |
 | Tatsugiri | HP 68→78, Def 60→70 |  |  |
