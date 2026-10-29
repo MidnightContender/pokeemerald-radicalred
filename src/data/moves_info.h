@@ -21435,6 +21435,51 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .battleAnimScript = gBattleAnimMove_VoltTackle,
     },
 
+    [MOVE_DRACO_BARRAGE] =
+    {
+        .name = COMPOUND_STRING("Draco Barrage"),
+        .description = COMPOUND_STRING(
+            "Hits Fairies but hurts the\n"
+            "user. Uses higher attack."),
+        .effect = EFFECT_RECOIL,
+        .power = 100,
+        .type = TYPE_DRAGON,
+        .accuracy = 100,
+        .pp = 5,
+        .target = MOVE_TARGET_SELECTED,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        .argument = { .recoilPercentage = 33 },
+        .metronomeBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_DracoMeteor,
+    },
+
+    [MOVE_FORBIDDEN_SPELL] =
+    {
+        .name = COMPOUND_STRING("Forbidden Spell"),
+        .description = COMPOUND_STRING(
+            "Conjures a corrupt spell\n"
+            "with unexpected power."),
+        .effect = EFFECT_METRONOME,
+        .power = 0,
+        .type = TYPE_DARK,
+        .accuracy = 0,
+        .pp = 1,
+        .target = MOVE_TARGET_DEPENDS,
+        .priority = 0,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresProtect = TRUE,
+        .mirrorMoveBanned = TRUE,
+        .mimicBanned = TRUE,
+        .metronomeBanned = TRUE,
+        .copycatBanned = TRUE,
+        .sleepTalkBanned = TRUE,
+        .instructBanned = TRUE,
+        .encoreBanned = TRUE,
+        .assistBanned = TRUE,
+        .battleAnimScript = gBattleAnimMove_Metronome,
+    },
+
     // Z-Moves
     [MOVE_BREAKNECK_BLITZ] =
     {

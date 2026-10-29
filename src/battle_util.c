@@ -78,6 +78,7 @@ static bool32 CanBattlerFormChange(u32 battler, enum FormChanges method);
 // Submoves
 static u32 GetMirrorMoveMove(void);
 static u32 GetMetronomeMove(void);
+static u32 GetForbiddenSpellMove(void);
 static u32 GetAssistMove(void);
 static u32 GetSleepTalkMove(void);
 static u32 GetCopyCatMove(void);
@@ -1636,7 +1637,7 @@ u32 TrySetCantSelectMoveBattleScript(u32 battler)
             limitations++;
         }
     }
-    if (DYNAMAX_BYPASS_CHECK && (GetBattlerAbility(battler) == ABILITY_GORILLA_TACTICS) && *choicedMove != MOVE_NONE
+    if (DYNAMAX_BYPASS_CHECK && (IsChoiceLockingAbility(GetBattlerAbility(battler))) && *choicedMove != MOVE_NONE
               && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
     {
         gCurrentMove = *choicedMove;
@@ -1743,7 +1744,7 @@ u32 CheckMoveLimitations(u32 battler, u8 unusableMoves, u16 check)
         else if (check & MOVE_LIMITATION_STUFF_CHEEKS && moveEffect == EFFECT_STUFF_CHEEKS && GetItemPocket(gBattleMons[battler].item) != POCKET_BERRIES)
             unusableMoves |= 1u << i;
         // Gorilla Tactics
-        else if (check & MOVE_LIMITATION_CHOICE_ITEM && GetBattlerAbility(battler) == ABILITY_GORILLA_TACTICS && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
+        else if (check & MOVE_LIMITATION_CHOICE_ITEM && IsChoiceLockingAbility(GetBattlerAbility(battler)) && *choicedMove != MOVE_NONE && *choicedMove != MOVE_UNAVAILABLE && *choicedMove != move)
             unusableMoves |= 1u << i;
         // Can't Use Twice flag
         else if (check & MOVE_LIMITATION_CANT_USE_TWICE && MoveCantBeUsedTwice(move) && move == gLastResultingMoves[battler])
@@ -2416,7 +2417,7 @@ static enum MoveCanceler CancelerChoiceLock(struct BattleContext *ctx)
 
     if (gChosenMove != MOVE_STRUGGLE
      && (*choicedMoveAtk == MOVE_NONE || *choicedMoveAtk == MOVE_UNAVAILABLE)
-     && (IsHoldEffectChoice(holdEffect) || ctx->abilities[ctx->battlerAtk] == ABILITY_GORILLA_TACTICS))
+     && (IsHoldEffectChoice(holdEffect) || IsChoiceLockingAbility(ctx->abilities[ctx->battlerAtk])))
         *choicedMoveAtk = gChosenMove;
 
     u32 moveIndex;
@@ -2445,8 +2446,15 @@ static enum MoveCanceler CancelerCallSubmove(struct BattleContext *ctx)
         calledMove = GetMirrorMoveMove();
         break;
     case EFFECT_METRONOME:
-        calledMove = GetMetronomeMove();
-        battleScript = BattleScript_MetronomeAttackstring;
+        if (ctx->currentMove == MOVE_FORBIDDEN_SPELL)
+        {
+            calledMove = GetForbiddenSpellMove();
+        }
+        else
+        {
+            calledMove = GetMetronomeMove();
+            battleScript = BattleScript_MetronomeAttackstring;
+        }
         break;
     case EFFECT_ASSIST:
         calledMove = GetAssistMove();
@@ -7465,6 +7473,11 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
         if (IsKickingMove(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
         break;
+    case ABILITY_BULL_RUSH:
+    case ABILITY_QUILL_RUSH:
+        if (gDisableStructs[battlerAtk].isFirstTurn)
+           modifier = uq4_12_multiply(modifier, UQ_4_12(1.2));
+        break;
     case ABILITY_SHEER_FORCE:
         if (MoveIsAffectedBySheerForce(move))
            modifier = uq4_12_multiply(modifier, UQ_4_12(1.3));
@@ -7869,6 +7882,10 @@ static inline u32 CalcAttackStat(struct DamageContext *ctx)
         break;
     case ABILITY_GORILLA_TACTICS:
         if (IsBattleMovePhysical(move))
+            modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
+        break;
+    case ABILITY_SAGE_POWER:
+        if (IsBattleMoveSpecial(move))
             modifier = uq4_12_multiply(modifier, UQ_4_12(1.5));
         break;
     case ABILITY_ROCKY_PAYLOAD:
@@ -8354,6 +8371,10 @@ static inline uq4_12_t GetAttackerAbilitiesModifier(u32 battlerAtk, uq4_12_t typ
         if (typeEffectivenessModifier >= UQ_4_12(2.0))
             return UQ_4_12(1.25);
         break;
+    case ABILITY_FATAL_PRECISION:
+        if (typeEffectivenessModifier >= UQ_4_12(2.0))
+            return UQ_4_12(1.2);
+        break;
     case ABILITY_SNIPER:
         if (isCrit)
             return UQ_4_12(1.5);
@@ -8793,6 +8814,14 @@ static inline void MulByTypeEffectiveness(struct DamageContext *ctx, uq4_12_t *m
 
     if (ctx->moveType == TYPE_PSYCHIC && defType == TYPE_DARK && gBattleMons[ctx->battlerDef].volatiles.miracleEye && mod == UQ_4_12(0.0))
         mod = UQ_4_12(1.0);
+    if (ctx->move == MOVE_DRACO_BARRAGE && defType == TYPE_FAIRY && mod == UQ_4_12(0.0))
+        mod = UQ_4_12(1.0);
+    if (ctx->abilityAtk == ABILITY_BONE_ZONE && IsBoneMove(ctx->move) && mod < UQ_4_12(1.0))
+    {
+        mod = UQ_4_12(1.0);
+        if (ctx->updateFlags)
+            RecordAbilityBattle(ctx->battlerAtk, ctx->abilityAtk);
+    }
     if (GetMoveEffect(ctx->move) == EFFECT_SUPER_EFFECTIVE_ON_ARG && defType == GetMoveArgType(ctx->move) && !ctx->isAnticipation)
         mod = UQ_4_12(2.0);
     if (ctx->moveType == TYPE_GROUND && defType == TYPE_FLYING && IsBattlerGrounded(ctx->battlerDef, ctx->abilityDef, ctx->holdEffectDef) && mod == UQ_4_12(0.0))
@@ -8892,7 +8921,8 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
         if (B_GLARE_GHOST < GEN_4 && ctx->move == MOVE_GLARE && IS_BATTLER_OF_TYPE(ctx->battlerDef, TYPE_GHOST))
             modifier = UQ_4_12(0.0);
     }
-    else if (ctx->moveType == TYPE_GROUND && !IsBattlerGroundedInverseCheck(ctx->battlerDef, ctx->abilityDef, ctx->holdEffectDef, INVERSE_BATTLE, ctx->isAnticipation) && !(MoveIgnoresTypeIfFlyingAndUngrounded(ctx->move)))
+    else if (ctx->moveType == TYPE_GROUND && !IsBattlerGroundedInverseCheck(ctx->battlerDef, ctx->abilityDef, ctx->holdEffectDef, INVERSE_BATTLE, ctx->isAnticipation) && !(MoveIgnoresTypeIfFlyingAndUngrounded(ctx->move))
+             && !(ctx->abilityAtk == ABILITY_BONE_ZONE && IsBoneMove(ctx->move)))
     {
         modifier = UQ_4_12(0.0);
         if (ctx->updateFlags && ctx->abilityDef == ABILITY_LEVITATE)
@@ -9811,6 +9841,9 @@ void SetDynamicMoveCategory(u32 battlerAtk, u32 battlerDef, u32 move)
     case EFFECT_PHOTON_GEYSER:
         gBattleStruct->swapDamageCategory = (GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL);
         break;
+    case EFFECT_RECOIL:
+        gBattleStruct->swapDamageCategory = (move == MOVE_DRACO_BARRAGE && GetCategoryBasedOnStats(battlerAtk) == DAMAGE_CATEGORY_PHYSICAL);
+        break;
     case EFFECT_SHELL_SIDE_ARM:
         if (gBattleStruct->shellSideArmCategory[battlerAtk][battlerDef] == DAMAGE_CATEGORY_PHYSICAL)
             gBattleStruct->swapDamageCategory = TRUE;
@@ -10621,6 +10654,20 @@ bool32 DoesDestinyBondFail(u32 battler)
 
 // This check has always to be the last in a condtion statement because of the recording of AI data.
 // Moves boosted by Striker
+bool32 IsBoneMove(u32 move)
+{
+    switch (move)
+    {
+    case MOVE_BONE_CLUB:
+    case MOVE_BONEMERANG:
+    case MOVE_BONE_RUSH:
+    case MOVE_SHADOW_BONE:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
 bool32 IsKickingMove(u32 move)
 {
     switch (move)
@@ -10987,6 +11034,13 @@ bool32 CanMoveSkipAccuracyCalc(u32 battlerAtk, u32 battlerDef, enum Ability abil
     {
         effect = TRUE;
     }
+    else if (abilityAtk == ABILITY_FATAL_PRECISION
+          && CalcTypeEffectivenessMultiplierHelper(move, GetBattleMoveType(move), battlerAtk, battlerDef, abilityAtk, abilityDef, FALSE) >= UQ_4_12(2.0))
+    {
+        effect = TRUE;
+        if (option == RUN_SCRIPT)
+            RecordAbilityBattle(battlerAtk, ABILITY_FATAL_PRECISION);
+    }
 
     if (!effect && HasWeatherEffect())
     {
@@ -11260,6 +11314,23 @@ static u32 GetMetronomeMove(void)
 
     move = RandomUniformExcept(RNG_METRONOME, 1, moveCount - 1, InvalidMetronomeMove);
     return move;
+}
+
+static const u16 sForbiddenSpellMoves[] =
+{
+    MOVE_SHELL_SMASH,
+    MOVE_HEALING_WISH,
+    MOVE_DARK_HOLE,
+    MOVE_TAIL_GLOW,
+    MOVE_ROAR_OF_TIME,
+    MOVE_QUIVER_DANCE,
+    MOVE_NO_RETREAT,
+    MOVE_SOUL_ROBBERY,
+};
+
+static u32 GetForbiddenSpellMove(void)
+{
+    return sForbiddenSpellMoves[RandomUniform(RNG_METRONOME, 0, ARRAY_COUNT(sForbiddenSpellMoves) - 1)];
 }
 
 static u32 GetAssistMove(void)

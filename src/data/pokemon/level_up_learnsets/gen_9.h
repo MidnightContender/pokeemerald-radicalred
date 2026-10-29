@@ -5977,6 +5977,7 @@ static const struct LevelUpMove sMismagiusLevelUpLearnset[] = {
 static const struct LevelUpMove sUnownLevelUpLearnset[] = {
     LEVEL_UP_MOVE( 1, MOVE_HIDDEN_POWER),
     LEVEL_UP_MOVE(22, MOVE_MYSTICAL_POWER),
+    LEVEL_UP_MOVE(34, MOVE_FORBIDDEN_SPELL),
     LEVEL_UP_MOVE(47, MOVE_ANCIENT_POWER),
     LEVEL_UP_END
 };
@@ -9737,6 +9738,7 @@ static const struct LevelUpMove sTropiusLevelUpLearnset[] = {
     LEVEL_UP_MOVE(42, MOVE_SYNTHESIS),
     LEVEL_UP_MOVE(44, MOVE_DRAGON_PULSE),
     LEVEL_UP_MOVE(48, MOVE_SOLAR_BEAM),
+    LEVEL_UP_MOVE(52, MOVE_DRACO_BARRAGE),
     LEVEL_UP_MOVE(55, MOVE_LEAF_STORM),
     LEVEL_UP_END
 };
@@ -9776,6 +9778,7 @@ static const struct LevelUpMove sChimechoLevelUpLearnset[] = {
     LEVEL_UP_MOVE(37, MOVE_SAFEGUARD),
     LEVEL_UP_MOVE(42, MOVE_DOUBLE_EDGE),
     LEVEL_UP_MOVE(47, MOVE_HEAL_PULSE),
+    LEVEL_UP_MOVE(50, MOVE_FORBIDDEN_SPELL),
     LEVEL_UP_MOVE(52, MOVE_SYNCHRONOISE),
     LEVEL_UP_MOVE(57, MOVE_HEALING_WISH),
     LEVEL_UP_END
@@ -15536,6 +15539,7 @@ static const struct LevelUpMove sHydreigonLevelUpLearnset[] = {
     LEVEL_UP_MOVE(48, MOVE_BODY_SLAM),
     LEVEL_UP_MOVE(55, MOVE_SCARY_FACE),
     LEVEL_UP_MOVE(68, MOVE_FICKLE_BEAM),
+    LEVEL_UP_MOVE(85, MOVE_DRACO_BARRAGE),
     LEVEL_UP_END
 };
 #endif //P_FAMILY_DEINO
@@ -19053,6 +19057,7 @@ static const struct LevelUpMove sKommoOLevelUpLearnset[] = {
     LEVEL_UP_MOVE(62, MOVE_OUTRAGE),
     LEVEL_UP_MOVE(68, MOVE_CLANGOROUS_SOUL),
     LEVEL_UP_MOVE(73, MOVE_CLOSE_COMBAT),
+    LEVEL_UP_MOVE(77, MOVE_DRACO_BARRAGE),
     LEVEL_UP_END
 };
 #endif //P_FAMILY_JANGMO_O
@@ -19385,6 +19390,7 @@ static const struct LevelUpMove sGuzzlordLevelUpLearnset[] = {
     LEVEL_UP_MOVE(63, MOVE_SUCKER_PUNCH),
     LEVEL_UP_MOVE(67, MOVE_WRING_OUT),
     LEVEL_UP_MOVE(73, MOVE_DRAGON_HAMMER),
+    LEVEL_UP_MOVE(77, MOVE_DRACO_BARRAGE),
     LEVEL_UP_END
 };
 #endif //P_FAMILY_GUZZLORD

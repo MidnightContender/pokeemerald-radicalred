@@ -409,6 +409,12 @@ bool32 IsSleepClauseEnabled();
 void ClearDamageCalcResults(void);
 u32 DoesDestinyBondFail(u32 battler);
 bool32 IsKickingMove(u32 move);
+bool32 IsBoneMove(u32 move);
+
+static inline bool32 IsChoiceLockingAbility(enum Ability ability)
+{
+    return ability == ABILITY_GORILLA_TACTICS || ability == ABILITY_SAGE_POWER;
+}
 bool32 IsMoveEffectBlockedByTarget(enum Ability ability);
 bool32 IsPursuitTargetSet(void);
 void ClearPursuitValuesIfSet(u32 battler);
