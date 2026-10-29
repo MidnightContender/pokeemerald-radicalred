@@ -1017,7 +1017,7 @@ DOUBLE_BATTLE_TEST("Dynamax: G-Max Stun Shock paralyzes or poisons both opponent
     GIVEN {
         ASSUME(MoveHasAdditionalEffect(MOVE_G_MAX_STUN_SHOCK, MOVE_EFFECT_POISON_PARALYZE_SIDE));
         PLAYER(SPECIES_TOXTRICITY) { GigantamaxFactor(TRUE); }
-        PLAYER(SPECIES_TOXEL);
+        PLAYER(SPECIES_TOXEL) { Ability(ABILITY_STATIC); }
         OPPONENT(SPECIES_WOBBUFFET);
         OPPONENT(SPECIES_WYNAUT);
     } WHEN {

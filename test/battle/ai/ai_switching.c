@@ -50,7 +50,7 @@ AI_SINGLE_BATTLE_TEST("AI sees on-field player ability correctly and does not se
         PLAYER(SPECIES_PIKACHU) { Level(100); Moves(MOVE_VOLT_SWITCH, MOVE_SPARKLY_SWIRL); Ability(ABILITY_LIGHTNING_ROD); }
         PLAYER(SPECIES_LANTURN) { Level(44); Moves(MOVE_SCALD); Ability(testAbility); }
         OPPONENT(SPECIES_SOBBLE) { Level(44); Moves(MOVE_SCRATCH); }
-        OPPONENT(SPECIES_BOMBIRDIER) { Level(42); Moves(MOVE_ROCK_SLIDE); }
+        OPPONENT(SPECIES_BOMBIRDIER) { Level(42); Moves(MOVE_ROCK_SLIDE); Ability(ABILITY_BIG_PECKS); MaxHP(110); HP(110); }
         OPPONENT(SPECIES_IRON_THORNS) { Level(43); Moves(MOVE_SUPERCELL_SLAM, MOVE_ICE_PUNCH); }
     } WHEN {
         TURN {
@@ -584,7 +584,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_WING_ATTACK, MOVE_BOOMBURST); Speed(5); SpAttack(50); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Moves(MOVE_NONE); Speed(4); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); SpDefense(50); } // Mid battle, AI sends out Aron
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SWITCH(opponent, 1); }
     }
@@ -598,7 +598,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_FALSE_SWIPE, MOVE_BOOMBURST); Speed(5); SpAttack(50); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Moves(MOVE_U_TURN); Speed(4); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); SpDefense(50); }
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_FALSE_SWIPE); EXPECT_SEND_OUT(opponent, 2); }
     }
@@ -613,7 +613,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_FALSE_SWIPE, MOVE_BOOMBURST); Speed(5); SpAttack(50); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Item(ITEM_EJECT_BUTTON); Moves(MOVE_SCRATCH); Speed(4); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); SpDefense(50); }
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_FALSE_SWIPE); EXPECT_SEND_OUT(opponent, 2); }
     }
@@ -628,7 +628,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_GROWL, MOVE_BOOMBURST); Speed(5); SpAttack(50); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Item(ITEM_EJECT_PACK); Moves(MOVE_SCRATCH); Speed(4); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); SpDefense(50); }
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_GROWL); EXPECT_SEND_OUT(opponent, 2); }
     }
@@ -643,7 +643,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_WING_ATTACK, MOVE_BOOMBURST); Speed(5); SpAttack(50); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Item(ITEM_EJECT_PACK); Moves(MOVE_OVERHEAT); Speed(6); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); SpDefense(50); }
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SEND_OUT(opponent, 1); }
     }
@@ -658,7 +658,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Mid-battle switches prioritize
         PLAYER(SPECIES_STARAPTOR) { Level(30); Ability(ABILITY_INTIMIDATE); Moves(MOVE_WING_ATTACK, MOVE_BOOMBURST); Speed(5); SpAttack(50); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Item(ITEM_EJECT_PACK); Moves(MOVE_OVERHEAT); Speed(6); } // Forces switchout
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); SpDefense(50); }
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); SpDefense(53); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SWITCH(opponent, 2); }
     }
@@ -671,7 +671,7 @@ AI_SINGLE_BATTLE_TEST("AI_FLAG_SMART_MON_CHOICES: Post-KO switches prioritize of
         PLAYER(SPECIES_SWELLOW) { Level(30); Moves(MOVE_WING_ATTACK, MOVE_BOOMBURST); Speed(5); }
         OPPONENT(SPECIES_PONYTA) { Level(1); Moves(MOVE_SCRATCH); Speed(4); }
         OPPONENT(SPECIES_ARON) { Level(30); Moves(MOVE_IRON_HEAD); Speed(4); } // Mid battle, AI sends out Aron
-        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); }
+        OPPONENT(SPECIES_ELECTRODE) { Level(30); Ability(ABILITY_STATIC); Moves(MOVE_CHARGE_BEAM); Speed(6); Attack(35); SpAttack(53); }
     } WHEN {
             TURN { MOVE(player, MOVE_WING_ATTACK); EXPECT_SEND_OUT(opponent, 2); }
     }

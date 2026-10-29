@@ -4367,12 +4367,12 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
 
 #define SILVALLY_SPECIES_INFO(type, _palette)                                       \
     {                                                                               \
-        .baseHP        = 100,                                                        \
-        .baseAttack    = 100,                                                        \
-        .baseDefense   = 100,                                                        \
-        .baseSpeed     = 100,                                                        \
-        .baseSpAttack  = 100,                                                        \
-        .baseSpDefense = 100,                                                        \
+        .baseHP        = 100,                                                       \
+        .baseAttack    = 100,                                                       \
+        .baseDefense   = 100,                                                       \
+        .baseSpeed     = 100,                                                       \
+        .baseSpAttack  = 100,                                                       \
+        .baseSpDefense = 100,                                                       \
         .types = MON_TYPES(type),                                                   \
         .catchRate = 3,                                                             \
         .expYield = (P_UPDATED_EXP_YIELDS >= GEN_8) ? 285 : 257,                    \
